@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TPO2</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_musica">Musica</string>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+</resources>
