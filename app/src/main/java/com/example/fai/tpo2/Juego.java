@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -23,13 +25,18 @@ public class Juego extends SurfaceView {
     private long lastClick;
     private Bitmap bmpBlood;
 
-    private MediaPlayer mp;
+    //private MediaPlayer mp;
+    private SoundPool sonido = new SoundPool(10, AudioManager.STREAM_MUSIC,0);
+    private int sonidito;
+
 
     public Juego(Context context) {
         super(context);
         gameLoopThread = new HiloJuego(this);
 
-        mp = MediaPlayer.create(context, R.raw.smw_coin);
+        //mp = MediaPlayer.create(context, R.raw.smw_coin);
+
+        sonidito = sonido.load(context,R.raw.bum,1);
 
         getHolder().addCallback(new SurfaceHolder.Callback() {
 
@@ -107,7 +114,8 @@ public class Juego extends SurfaceView {
                         sprites.remove(sprite);
 
 
-                        mp.start();
+                        //mp.start();
+                        sonido.play(sonidito,1,1,0,0,1.5F);
 
                         temps.add(new TempSprite(temps, this, x, y, bmpBlood));
                         break;

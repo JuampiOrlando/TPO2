@@ -4,16 +4,25 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.media.MediaPlayer;
 
 public class MainActivity extends Activity {
+
+    MediaPlayer musicaFondo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
         setContentView(new Juego(this));
+
+        musicaFondo = MediaPlayer.create(this,R.raw.musicafondo);
+        musicaFondo.setLooping(true);
+        musicaFondo.start();
+
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+
 
 
 /*
@@ -54,5 +63,11 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
 
+    protected void onPause(){
+        super.onPause();
+        musicaFondo.release();
+        finish();
+    }
 }
