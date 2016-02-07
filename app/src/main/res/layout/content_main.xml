@@ -9,7 +9,7 @@
 
     android:background="@color/black"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main" tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main" tools:context=".JuegoActivity"
     android:id="@+id/principal">
 
     <TextView android:text="Hello World!"

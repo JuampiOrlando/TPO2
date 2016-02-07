@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/app_hack_android"
+
+
+    >
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.7">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+
+            >
+            <Button android:id="@+id/btnJugar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClickJugar"
+                android:text="Jugar"
+                android:textSize="20sp"
+
+                />
+
+            <Button android:id="@+id/btnRanking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClickRanking"
+                android:text="Ranking"
+                android:textSize="20sp"
+                />
+         </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
+    </RelativeLayout>
+     <!-- Estos, son para agregar dsps! (No iria aca!)
+     <TextView
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:text="Introduzca algún texto"/>
+     <EditText
+         android:id="@+id/txtText1"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"/> -->
+
+    <!-- Esta funcion no va aca! Es para registrar el nick y el rankin!
+    <Button android:id="@+id/btnGuardar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickGuardar"
+        android:text="Guardar"/>
+        -->
+
+    <!--
+    <TextView android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/Puntos"
+        android:layout_weight="0.10"/>
+        -->
+</LinearLayout>

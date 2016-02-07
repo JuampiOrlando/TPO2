@@ -1,73 +1,169 @@
 package com.example.fai.tpo2;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.media.MediaPlayer;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class MainActivity extends Activity {
-
-    MediaPlayer musicaFondo;
+    //private EditText textBox;
+    //private TextView puntitos;
+    static final int READ_BLOCK_SIZE = 100;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
-        setContentView(new Juego(this));
+        setContentView(R.layout.content_principal);
 
-        musicaFondo = MediaPlayer.create(this,R.raw.musicafondo);
-        musicaFondo.setLooping(true);
-        musicaFondo.start();
+       // textBox = (EditText) findViewById(R.id.txtText1);
+        //puntitos = (TextView) findViewById(R.id.Puntos);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
 
-
-
+    public void onClickJugar(View v) {
 /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //       .setAction("Action", null).show();
-                View asd = findViewById(R.id.principal);
-                asd.setBackgroundColor(0xFF00FF00);
+        //Podriamos usar un Toast si quisieramos
+        Context context = getApplicationContext();
+        CharSequence text = "Bienvenido!!";
+        int duration = Toast.LENGTH_SHORT;
 
-            }
-        });
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
 */
+        //Mensaje de Bienvenida
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+        builder1.setMessage("Que Comience el Juego!!");
+        builder1.setCancelable(false);
+        builder1.setPositiveButton(
+                "Comenzar",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        //Invocando la otra Activity
+                        Intent intent = new Intent(MainActivity.this, JuegoActivity.class);
+                        //intent.putExtra(EXTRA_MESSAGE, message);
+                        startActivity(intent);
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    /*public void onClickGuardar(View v) {
+        String str = textBox.getText().toString();
+        try {
+            FileOutputStream fos = openFileOutput("textFile.txt", MODE_PRIVATE);
+            OutputStreamWriter osw = new OutputStreamWriter(fos);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+            // Escribimos el String en el archivo
+            osw.write("\n" + str);
+            osw.flush();
+            osw.close();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            // Mostramos que se ha guardado
+            Toast.makeText(getBaseContext(), "Guardado", Toast.LENGTH_SHORT).show();
+
+            textBox.setText("");
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
 
-        return super.onOptionsItemSelected(item);
+    }*/
+
+   /* public void onClickRanking(View v) {
+        try {
+            FileInputStream fis = openFileInput("textFile.txt");
+            InputStreamReader isr = new InputStreamReader(fis);
+
+            char[] inputBuffer = new char[READ_BLOCK_SIZE];
+            String s = "";
+
+            int charRead;
+            while ((charRead = isr.read(inputBuffer)) > 0) {
+                // Convertimos los char a String
+                String readString = String.copyValueOf(inputBuffer, 0, charRead);
+                s += readString;
+
+                inputBuffer = new char[READ_BLOCK_SIZE];
+            }
+
+            // Establecemos en el visor el texto que hemos leido
+            puntitos.setText(s);
+
+            // Mostramos un Toast con el proceso completado
+            Toast.makeText(getBaseContext(), "Cargado", Toast.LENGTH_SHORT).show();
+
+            isr.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    */
+    //Esto se autogenero solo! Dsps debemos revisar!
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.example.fai.tpo2/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
 
-    protected void onPause(){
-        super.onPause();
-        musicaFondo.release();
-        finish();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.example.fai.tpo2/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
     }
 }
