@@ -1,5 +1,5 @@
 # TPO2
-Juego Android Sencillo - TPO Laboratorio - Facultad de Informática 
+Juego Android Sencillo - TPO Laboratorio de Programacion - Facultad de Informática - Universidad Nacional del Comahue - Argentina 
 
 #ToDo:
 <ul>
