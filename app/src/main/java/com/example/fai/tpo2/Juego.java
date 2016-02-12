@@ -1,15 +1,10 @@
 package com.example.fai.tpo2;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -77,18 +72,18 @@ public class Juego extends SurfaceView {
     }
 
     private void createSprites() {
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
+        sprites.add(createSprite(R.drawable.asd,5));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
     }
 
     public boolean juegoTerminado(){
@@ -110,9 +105,9 @@ public class Juego extends SurfaceView {
     }
 
 
-    private Sprite createSprite(int resouce) {
+    private Sprite createSprite(int resouce,int vidas) {
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resouce);
-        return new Sprite(this, bmp);
+        return new Sprite(this, bmp,vidas);
     }
 
     @Override
@@ -138,13 +133,17 @@ public class Juego extends SurfaceView {
                 for (int i = sprites.size() - 1; i >= 0; i--) {
                     Sprite sprite = sprites.get(i);
                     if (sprite.isCollition(x, y)) {
-                        sprites.remove(sprite);
+                        if(sprite.seMurio()){
+                            sprites.remove(sprite);
+                            temps.add(new TempSprite(temps, this, x, y, bmpBlood));
+                        }
+
 
 
                         //mp.start();
                         sonido.play(sonidito, 1, 1, 0, 0, 1.5F);
 
-                        temps.add(new TempSprite(temps, this, x, y, bmpBlood));
+
 
                         break;
                     }

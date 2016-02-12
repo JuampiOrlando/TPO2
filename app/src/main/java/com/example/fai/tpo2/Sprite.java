@@ -26,11 +26,15 @@ public class Sprite {
     private int width;
     private int height;
 
-    public Sprite(Juego gameView, Bitmap bmp) {
+    private int vidas;
+
+    public Sprite(Juego gameView, Bitmap bmp, int vidasP) {
         this.width = bmp.getWidth() / BMP_COLUMNS;
         this.height = bmp.getHeight() / BMP_ROWS;
         this.gameView = gameView;
         this.bmp = bmp;
+
+        this.vidas = vidasP; //Vidas del Sprite (ingresan por parametro)
 
         Random rnd = new Random();
         x = rnd.nextInt(gameView.getWidth() - width);
@@ -58,6 +62,7 @@ public class Sprite {
         Rect src = new Rect(srcX, srcY, srcX + width, srcY + height);
         Rect dst = new Rect(x, y, x + width, y + height);
         canvas.drawBitmap(bmp, src, dst, null);
+
     }
 
     private int getAnimationRow() {
@@ -68,5 +73,14 @@ public class Sprite {
 
     public boolean isCollition(float x2, float y2) {
         return x2 > x && x2 < x + width && y2 > y && y2 < y + height;
+    }
+
+    /*
+    * Cada Touch que coincide con el sprite le quito una vida
+    * y pregunto si murio
+    * */
+    public boolean seMurio(){
+        vidas--;
+        return (vidas==0);
     }
 }
