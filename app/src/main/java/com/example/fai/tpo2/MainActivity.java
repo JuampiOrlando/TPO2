@@ -68,6 +68,7 @@ public class MainActivity extends Activity {
                         Intent intent = new Intent(MainActivity.this, JuegoActivity.class);
                         //intent.putExtra(EXTRA_MESSAGE, message);
                         startActivity(intent);
+                        //finish();
                     }
                 });
 

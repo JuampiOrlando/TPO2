@@ -2,6 +2,8 @@ package com.example.fai.tpo2;
 
 import android.graphics.Canvas;
 
+import static com.example.fai.tpo2.JuegoActivity.*;
+
 /**
  * Created by morexlt on 2/3/16.
  */
@@ -30,7 +32,13 @@ public class HiloJuego extends Thread {
             try {
                 c = view.getHolder().lockCanvas();
                 synchronized (view.getHolder()) {
+                    if(view.juegoTerminado()) {
+                        System.out.println("JUEGO TERMINAOD :D ");
+                        view.getNickname();
+                        view.terminar();
+                    }
                     view.onDraw(c);
+
                 }
             } finally {
                 if (c != null) {
@@ -45,5 +53,6 @@ public class HiloJuego extends Thread {
                     sleep(10);
             } catch (Exception e) {}
         }
-    }
+
+        }
 }

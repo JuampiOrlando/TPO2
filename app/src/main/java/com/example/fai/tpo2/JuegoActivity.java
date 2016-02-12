@@ -18,6 +18,7 @@ public class JuegoActivity extends Activity {
         //setContentView(R.layout.activity_main);
         setContentView(new Juego(this));
 
+
         musicaFondo = MediaPlayer.create(this,R.raw.musicafondo);
         musicaFondo.setLooping(true);
         musicaFondo.start();
@@ -32,7 +33,6 @@ public class JuegoActivity extends Activity {
         toast.show();
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-
 
 
 /*

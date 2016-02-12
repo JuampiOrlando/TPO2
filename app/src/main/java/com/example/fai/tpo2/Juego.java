@@ -1,6 +1,9 @@
 package com.example.fai.tpo2;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -29,9 +32,11 @@ public class Juego extends SurfaceView {
     private SoundPool sonido = new SoundPool(10, AudioManager.STREAM_MUSIC,0);
     private int sonidito;
 
+    private JuegoActivity actividadJ;
 
-    public Juego(Context context) {
+    public Juego(JuegoActivity context) {
         super(context);
+        actividadJ = context;
         gameLoopThread = new HiloJuego(this);
 
         //mp = MediaPlayer.create(context, R.raw.smw_coin);
@@ -43,13 +48,16 @@ public class Juego extends SurfaceView {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
+
+                System.out.println("Termino?");
                 boolean retry = true;
                 gameLoopThread.setRunning(false);
                 while (retry) {
                     try {
                         gameLoopThread.join();
                         retry = false;
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {
+                    }
                 }
             }
 
@@ -83,6 +91,25 @@ public class Juego extends SurfaceView {
         sprites.add(createSprite(R.drawable.asd));
     }
 
+    public boolean juegoTerminado(){
+        boolean fin = sprites.isEmpty();
+        return fin;
+    }
+
+    public void terminar(){
+
+        sprites.clear();
+        temps.clear();
+        gameLoopThread.setRunning(false);
+        actividadJ.finish();
+
+    }
+
+    public void getNickname(){
+        System.out.println("pedimos los datos!!!!!!!!");
+    }
+
+
     private Sprite createSprite(int resouce) {
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resouce);
         return new Sprite(this, bmp);
@@ -115,9 +142,10 @@ public class Juego extends SurfaceView {
 
 
                         //mp.start();
-                        sonido.play(sonidito,1,1,0,0,1.5F);
+                        sonido.play(sonidito, 1, 1, 0, 0, 1.5F);
 
                         temps.add(new TempSprite(temps, this, x, y, bmpBlood));
+
                         break;
                     }
                 }
