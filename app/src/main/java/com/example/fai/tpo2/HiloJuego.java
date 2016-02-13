@@ -38,6 +38,9 @@ public class HiloJuego extends Thread {
                         view.terminar();
                     }
                     view.onDraw(c);
+                    view.actualizarArregloSprites();
+                    view.comprobarYgenerarSprites();
+
 
                 }
             } finally {
