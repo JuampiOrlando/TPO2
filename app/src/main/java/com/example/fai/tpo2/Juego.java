@@ -134,11 +134,6 @@ public class Juego extends SurfaceView {
 
     }
 
-    private int carrilInicial(){
-        //PARA DECIDIR EN QUE CARRIL VA A APARECER NUESTRO SPRITE
-        return 0;
-    }
-
     public boolean juegoTerminado(){
         boolean fin = vidas==0;
         return fin;
