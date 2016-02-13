@@ -8,6 +8,7 @@
     <string name="play">Jugar</string>
     <string name="stats">Ranking</string>
     <string name="exit">Salir</string>
+    <string name="fin">Juego terminado :D</string>
 
 
     <color name="black">#000000</color>

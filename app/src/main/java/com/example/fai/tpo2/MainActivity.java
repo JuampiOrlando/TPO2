@@ -53,8 +53,8 @@ public class MainActivity extends Activity {
 */
         //Mensaje de Bienvenida
         AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-        String mensaje = getResources().getString(R.string.begin);
-        builder1.setMessage(mensaje);
+        String msj = getResources().getString(R.string.begin);
+        builder1.setMessage(msj);
         builder1.setCancelable(false);
         builder1.setPositiveButton(
                 getResources().getString(R.string.begin2),
