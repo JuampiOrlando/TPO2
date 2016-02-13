@@ -120,7 +120,7 @@ public class Juego extends SurfaceView {
             int diferencia = numeroMaximoSprites-sprites.size();
 
             for(int i = 0; i < diferencia; i++){
-                sprites.add(createSprite(R.drawable.asd, (rnd.nextInt(3) + 1) ));
+                sprites.add(createSprite(R.drawable.asd, (rnd.nextInt(10) + 1) ));
             }
         }
 

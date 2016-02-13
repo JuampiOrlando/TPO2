@@ -6,9 +6,6 @@ import android.graphics.Rect;
 
 import java.util.Random;
 
-/**
- * Created by morexlt on 2/3/16.
- */
 public class Sprite {
     // direction = 0 up, 1 left, 2 down, 3 right,
     // animation = 3 back, 1 left, 0 front, 2 right
@@ -61,38 +58,26 @@ public class Sprite {
 
 
         //////////////////////////
-        xSpeed = rnd.nextInt(MAX_SPEED * 5);
+        xSpeed = rnd.nextInt(MAX_SPEED * 5) + 1;
         //ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
         ySpeed = 0;
     }
 
     private void update() {
-        /*if (x >= gameView.getWidth() - width - xSpeed || x + xSpeed <= 0) {
-            xSpeed = -xSpeed;
-        }*/
         x = x + xSpeed;
-        /*if (y >= gameView.getHeight() - height - ySpeed || y + ySpeed <= 0) {
-            ySpeed = -ySpeed;
-        }
-        y = y + ySpeed;*/
         currentFrame = ++currentFrame % BMP_COLUMNS;
     }
 
     public void onDraw(Canvas canvas) {
         update();
         int srcX = currentFrame * width;
-        int srcY = getAnimationRow() * height;
+        int srcY = 0 * height;  //seleccionamos la fila del sprite
         Rect src = new Rect(srcX, srcY, srcX + width, srcY + height);
         Rect dst = new Rect(x, y, x + width, y + height);
         canvas.drawBitmap(bmp, src, dst, null);
 
     }
 
-    private int getAnimationRow() {
-        double dirDouble = (Math.atan2(xSpeed, ySpeed) / (Math.PI / 2) + 2);
-        int direction = (int) Math.round(dirDouble) % BMP_ROWS;
-        return DIRECTION_TO_ANIMATION_MAP[direction];
-    }
 
     public boolean isCollition(float x2, float y2) {
         return x2 > x && x2 < x + width && y2 > y && y2 < y + height;
