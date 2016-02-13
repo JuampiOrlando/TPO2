@@ -14,12 +14,11 @@ import android.media.SoundPool;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-/**
- * Created by morexlt on 2/3/16.
- */
+
 public class Juego extends SurfaceView {
 
     private HiloJuego gameLoopThread;
@@ -34,10 +33,23 @@ public class Juego extends SurfaceView {
 
     private JuegoActivity actividadJ;
 
+    private int contador;
+    private int vidas;
+    private TextView contadorVisual;
+    private TextView vidasVisual;
+
     public Juego(JuegoActivity context) {
         super(context);
         actividadJ = context;
+
+        contador = 0;
+        vidas = 3;
+
+        contadorVisual = (TextView)actividadJ.findViewById(R.id.contador);
+        vidasVisual = (TextView)actividadJ.findViewById(R.id.vidas);
+
         gameLoopThread = new HiloJuego(this);
+
 
         //mp = MediaPlayer.create(context, R.raw.smw_coin);
 
@@ -117,6 +129,9 @@ public class Juego extends SurfaceView {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+        //contadorVisual.setText(""+contador);
+
         canvas.drawColor(Color.BLACK);
         for (int i = temps.size() - 1; i >= 0; i--) {
             temps.get(i).onDraw(canvas);
@@ -139,7 +154,8 @@ public class Juego extends SurfaceView {
                     Sprite sprite = sprites.get(i);
                     if (sprite.isCollition(x, y)) {
                         sprites.remove(sprite);
-
+                        contador++;
+                        contadorVisual.setText(""+contador);
 
                         //mp.start();
                         sonido.play(sonidito, 1, 1, 0, 0, 1.5F);
