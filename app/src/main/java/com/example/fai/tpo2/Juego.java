@@ -120,7 +120,7 @@ public class Juego extends SurfaceView {
             int diferencia = numeroMaximoSprites-sprites.size();
 
             for(int i = 0; i < diferencia; i++){
-                sprites.add(createSprite(R.drawable.asd, (rnd.nextInt(10) + 1) ));
+                sprites.add(createSprite((rnd.nextInt(10) + 1)));
             }
         }
 
@@ -146,7 +146,49 @@ public class Juego extends SurfaceView {
     }
 
 
-    private Sprite createSprite(int resouce,int vidas) {
+    private Sprite createSprite(int vidas) {
+
+        //Seleccion del sprite dependiendo la vida;
+        int resouce;
+        switch (vidas){
+            case 0:
+                resouce = R.drawable.mini_good1;
+                break;
+            case 1:
+                resouce = R.drawable.mini_good2;
+                break;
+            case 2:
+                resouce = R.drawable.mini_good3;
+                break;
+            case 3:
+                resouce = R.drawable.mini_good4;
+                break;
+            case 4:
+                resouce = R.drawable.mini_good5;
+                break;
+            case 5:
+                resouce = R.drawable.mini_good6;
+                break;
+            case 6:
+                resouce = R.drawable.mini_bad1;
+                break;
+            case 7:
+                resouce = R.drawable.mini_bad2;
+                break;
+            case 8:
+                resouce = R.drawable.mini_bad3;
+                break;
+            case 9:
+                resouce = R.drawable.mini_bad4;
+                break;
+            case 10:
+                resouce = R.drawable.mini_bad5;
+                break;
+            default:
+                resouce = R.drawable.mini_bad6;
+
+        }
+
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resouce);
         return new Sprite(this, bmp,vidas);
     }
