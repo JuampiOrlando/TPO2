@@ -32,7 +32,6 @@ public class Sprite {
         this.height = bmp.getHeight() / BMP_ROWS;
         this.gameView = gameView;
         this.bmp = bmp;
-
         this.vidas = vidasP; //Vidas del Sprite (ingresan por parametro)
 
         Random rnd = new Random();
@@ -71,7 +70,7 @@ public class Sprite {
     public void onDraw(Canvas canvas) {
         update();
         int srcX = currentFrame * width;
-        int srcY = 0 * height;  //seleccionamos la fila del sprite
+        int srcY = 2 * height;  //seleccionamos la fila del sprite
         Rect src = new Rect(srcX, srcY, srcX + width, srcY + height);
         Rect dst = new Rect(x, y, x + width, y + height);
         canvas.drawBitmap(bmp, src, dst, null);
