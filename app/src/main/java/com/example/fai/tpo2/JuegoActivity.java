@@ -32,10 +32,10 @@ public class JuegoActivity extends Activity {
         musicaFondo.start();
 
         Context context = getApplicationContext();
-        CharSequence text = "Matalos a Todos!!!";
+        CharSequence txt = getResources().getString(R.string.mensaje);
         int duration = Toast.LENGTH_LONG;
 
-        Toast toast = Toast.makeText(context, text, duration);
+        Toast toast = Toast.makeText(context, txt, duration);
         toast.show();
 
 

@@ -53,10 +53,11 @@ public class MainActivity extends Activity {
 */
         //Mensaje de Bienvenida
         AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-        builder1.setMessage("Que Comience el Juego!!");
+        String msj = getResources().getString(R.string.begin);
+        builder1.setMessage(msj);
         builder1.setCancelable(false);
         builder1.setPositiveButton(
-                "Comenzar",
+                getResources().getString(R.string.begin2),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
@@ -71,6 +72,10 @@ public class MainActivity extends Activity {
         AlertDialog alert11 = builder1.create();
         alert11.show();
 
+    }
+
+    public void onClickSalir(View v){
+        finish();
     }
 
     /*public void onClickGuardar(View v) {

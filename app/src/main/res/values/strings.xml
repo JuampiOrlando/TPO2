@@ -2,6 +2,14 @@
     <string name="app_name">TPO2</string>
     <string name="action_settings">Settings</string>
     <string name="action_musica">Musica</string>
+    <string name="begin">Que comience el juego!</string>
+    <string name="begin2">Comenzar</string>
+    <string name="mensaje">Mátalos a todos!</string>
+    <string name="play">Jugar</string>
+    <string name="stats">Ranking</string>
+    <string name="exit">Salir</string>
+    <string name="fin">Juego terminado :D</string>
+
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
