@@ -28,7 +28,9 @@ public class Sprite {
 
     private int vidas;
 
-    public Sprite(Juego gameView, Bitmap bmp, int vidasP) {
+    public Sprite(Juego gameView, Bitmap bmp,int vidasP) {
+
+
         this.width = bmp.getWidth() / BMP_COLUMNS;
         this.height = bmp.getHeight() / BMP_ROWS;
         this.gameView = gameView;
@@ -37,21 +39,42 @@ public class Sprite {
         this.vidas = vidasP; //Vidas del Sprite (ingresan por parametro)
 
         Random rnd = new Random();
-        x = rnd.nextInt(gameView.getWidth() - width);
-        y = rnd.nextInt(gameView.getHeight() - height);
-        xSpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
-        ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
+        //x = rnd.nextInt(gameView.getWidth() - width);
+        x=0;
+
+
+        //////////////////////////////////////////////////////////////
+        //  4 Carriles
+
+        int maximo = gameView.getHeight();
+        System.out.println("maximo: " + maximo);
+        int divisor = maximo / 4;
+        System.out.println("divisor: " + divisor);
+
+        int carril = rnd.nextInt(4);
+
+        System.out.println("carril: " + carril);
+        y = carril * divisor;
+        System.out.println("y: " + y);
+
+
+
+
+        //////////////////////////
+        xSpeed = rnd.nextInt(MAX_SPEED * 5);
+        //ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
+        ySpeed = 0;
     }
 
     private void update() {
-        if (x >= gameView.getWidth() - width - xSpeed || x + xSpeed <= 0) {
+        /*if (x >= gameView.getWidth() - width - xSpeed || x + xSpeed <= 0) {
             xSpeed = -xSpeed;
-        }
+        }*/
         x = x + xSpeed;
-        if (y >= gameView.getHeight() - height - ySpeed || y + ySpeed <= 0) {
+        /*if (y >= gameView.getHeight() - height - ySpeed || y + ySpeed <= 0) {
             ySpeed = -ySpeed;
         }
-        y = y + ySpeed;
+        y = y + ySpeed;*/
         currentFrame = ++currentFrame % BMP_COLUMNS;
     }
 
@@ -82,5 +105,23 @@ public class Sprite {
     public boolean seMurio(){
         vidas--;
         return (vidas==0);
+    }
+
+    public void matarSprite(){
+        vidas = 0;
+    }
+
+    public int getVidas(){
+        return vidas;
+    }
+
+    public boolean sobrevivio(){
+        boolean resultado = false;
+
+        if (x + width >= gameView.getWidth() ){
+            resultado = true;
+        }
+
+        return resultado;
     }
 }

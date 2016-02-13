@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -30,13 +31,18 @@ public class Juego extends SurfaceView {
     //private MediaPlayer mp;
     private SoundPool sonido = new SoundPool(10, AudioManager.STREAM_MUSIC,0);
     private int sonidito;
-
     private JuegoActivity actividadJ;
+    private TextView puntos;
 
     private int contador;
     private int vidas;
     private TextView contadorVisual;
     private TextView vidasVisual;
+
+
+
+    private int numeroMaximoSprites = 10;
+
 
     public Juego(JuegoActivity context) {
         super(context);
@@ -54,6 +60,13 @@ public class Juego extends SurfaceView {
         //mp = MediaPlayer.create(context, R.raw.smw_coin);
 
         sonidito = sonido.load(context,R.raw.bum,1);
+        Canvas canvas = new Canvas();
+        Paint opcionesGraficas = new Paint();
+        opcionesGraficas.setColor(2);
+
+
+        canvas.drawText("hola",100,100,opcionesGraficas);
+
 
         getHolder().addCallback(new SurfaceHolder.Callback() {
 
@@ -75,7 +88,7 @@ public class Juego extends SurfaceView {
 
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                createSprites();
+                comprobarYgenerarSprites();
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
             }
@@ -88,8 +101,8 @@ public class Juego extends SurfaceView {
         bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
     }
 
-    private void createSprites() {
-        sprites.add(createSprite(R.drawable.asd,5));
+    /*private void createSprites() {
+        sprites.add(createSprite(R.drawable.asd, 5));
         sprites.add(createSprite(R.drawable.asd,1));
         sprites.add(createSprite(R.drawable.asd,1));
         sprites.add(createSprite(R.drawable.asd,1));
@@ -97,14 +110,37 @@ public class Juego extends SurfaceView {
         sprites.add(createSprite(R.drawable.asd,1));
         sprites.add(createSprite(R.drawable.asd,1));
         sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd, 1));
+        sprites.add(createSprite(R.drawable.asd, 1));
+        sprites.add(createSprite(R.drawable.asd, 1));
         sprites.add(createSprite(R.drawable.asd,1));
-        sprites.add(createSprite(R.drawable.asd,1));
-        sprites.add(createSprite(R.drawable.asd,1));
-        sprites.add(createSprite(R.drawable.asd,1));
+    }*/
+
+    public void comprobarYgenerarSprites(){
+
+
+
+        if(sprites.size()<numeroMaximoSprites){
+
+            int diferencia = numeroMaximoSprites-sprites.size();
+
+            for (int i = 0; i < diferencia ; i++) {
+
+                sprites.add(createSprite(R.drawable.asd,1));
+
+            }
+        }
+
+
+    }
+
+    private int carrilInicial(){
+        //PARA DECIDIR EN QUE CARRIL VA A APARECER NUESTRO SPRITE
+        return 0;
     }
 
     public boolean juegoTerminado(){
-        boolean fin = sprites.isEmpty();
+        boolean fin = vidas==0;
         return fin;
     }
 
@@ -127,6 +163,15 @@ public class Juego extends SurfaceView {
         return new Sprite(this, bmp,vidas);
     }
 
+    public void actualizarArregloSprites(){
+        for (int i = 0; i < sprites.size() ; i++) {
+
+            if(sprites.get(i).getVidas() == 0){
+                sprites.remove(i);
+            }
+        }
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
 
@@ -137,7 +182,18 @@ public class Juego extends SurfaceView {
             temps.get(i).onDraw(canvas);
         }
         for (Sprite sprite : sprites) {
-            sprite.onDraw(canvas);
+
+            if(sprite.sobrevivio()){
+                vidas = vidas - 1;
+                System.out.println("VIDASSSSSSS: " + vidas);
+                sprite.matarSprite();
+
+            }
+            else{
+                sprite.onDraw(canvas);
+            }
+
+
         }
     }
 
