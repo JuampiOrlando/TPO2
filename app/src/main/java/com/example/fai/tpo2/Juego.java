@@ -89,18 +89,18 @@ public class Juego extends SurfaceView {
     }
 
     private void createSprites() {
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
-        sprites.add(createSprite(R.drawable.asd));
+        sprites.add(createSprite(R.drawable.asd,5));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
+        sprites.add(createSprite(R.drawable.asd,1));
     }
 
     public boolean juegoTerminado(){
@@ -122,9 +122,9 @@ public class Juego extends SurfaceView {
     }
 
 
-    private Sprite createSprite(int resouce) {
+    private Sprite createSprite(int resouce,int vidas) {
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resouce);
-        return new Sprite(this, bmp);
+        return new Sprite(this, bmp,vidas);
     }
 
     @Override
