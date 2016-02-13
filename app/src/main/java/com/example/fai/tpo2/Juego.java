@@ -153,14 +153,18 @@ public class Juego extends SurfaceView {
                 for (int i = sprites.size() - 1; i >= 0; i--) {
                     Sprite sprite = sprites.get(i);
                     if (sprite.isCollition(x, y)) {
-                        sprites.remove(sprite);
-                        contador++;
-                        contadorVisual.setText(""+contador);
+                        if(sprite.seMurio()){
+                            sprites.remove(sprite);
+
+                            contador++;
+                            contadorVisual.setText(""+contador);
+
+                            temps.add(new TempSprite(temps, this, x, y, bmpBlood));
+                        }
 
                         //mp.start();
                         sonido.play(sonidito, 1, 1, 0, 0, 1.5F);
 
-                        temps.add(new TempSprite(temps, this, x, y, bmpBlood));
 
                         break;
                     }
