@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TPO2</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_musica">Music</string>
+    <string name="begin">Let the game begin!</string>
+    <string name="mensaje">Kill them all!</string>
+    <string name="begin2">Start</string>
+    <string name="play">Play</string>
+    <string name="stats">Ranking</string>
+    <string name="exit">Exit</string>
+
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+</resources>
