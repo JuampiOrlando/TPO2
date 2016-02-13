@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Juego extends SurfaceView {
 
@@ -109,18 +110,17 @@ public class Juego extends SurfaceView {
         sprites.add(createSprite(R.drawable.asd,1));
     }*/
 
+
     public void comprobarYgenerarSprites(){
 
-
+        Random rnd = new Random();
 
         if(sprites.size()<numeroMaximoSprites){
 
             int diferencia = numeroMaximoSprites-sprites.size();
 
-            for (int i = 0; i < diferencia ; i++) {
-
-                sprites.add(createSprite(R.drawable.asd,1));
-
+            for(int i = 0; i < diferencia; i++){
+                sprites.add(createSprite(R.drawable.asd, (rnd.nextInt(3) + 1) ));
             }
         }
 
