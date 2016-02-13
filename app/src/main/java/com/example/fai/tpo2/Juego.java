@@ -60,13 +60,6 @@ public class Juego extends SurfaceView {
         //mp = MediaPlayer.create(context, R.raw.smw_coin);
 
         sonidito = sonido.load(context,R.raw.bum,1);
-        Canvas canvas = new Canvas();
-        Paint opcionesGraficas = new Paint();
-        opcionesGraficas.setColor(2);
-
-
-        canvas.drawText("hola",100,100,opcionesGraficas);
-
 
         getHolder().addCallback(new SurfaceHolder.Callback() {
 
@@ -135,7 +128,7 @@ public class Juego extends SurfaceView {
     }
 
     public boolean juegoTerminado(){
-        boolean fin = vidas==0;
+        boolean fin = vidas<=0;
         return fin;
     }
 
