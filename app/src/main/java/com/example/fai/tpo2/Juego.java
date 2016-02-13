@@ -42,7 +42,7 @@ public class Juego extends SurfaceView {
 
 
 
-    private int numeroMaximoSprites = 10;
+    private int numeroMaximoSprites = 12;
 
 
     public Juego(JuegoActivity context) {
@@ -54,7 +54,6 @@ public class Juego extends SurfaceView {
 
         contadorVisual = (TextView)actividadJ.findViewById(R.id.contador);
         vidasVisual = (TextView)actividadJ.findViewById(R.id.vidas);
-
         gameLoopThread = new HiloJuego(this);
 
 
@@ -173,17 +172,25 @@ public class Juego extends SurfaceView {
 
             if(sprite.sobrevivio()){
                 vidas = vidas - 1;
-                System.out.println("VIDASSSSSSS: " + vidas);
-                sprite.matarSprite();
+                actividadJ.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        vidasVisual.setText("" + vidas);
+                    }
+                });
+                        sprite.matarSprite();
 
+                    }
+
+                    else
+
+                    {
+                        sprite.onDraw(canvas);
+                    }
+
+
+                }
             }
-            else{
-                sprite.onDraw(canvas);
-            }
-
-
-        }
-    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

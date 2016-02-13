@@ -24,6 +24,7 @@
             android:textColor="#ffffffff"
             android:gravity="left"
             android:layout_weight="1"
+            android:textSize="20sp"
             />
         <TextView
             android:layout_width="0dp"
@@ -33,6 +34,7 @@
             android:textColor="#ffffffff"
             android:gravity="right"
             android:layout_weight="1"
+            android:textSize="20sp"
             />
 
     </LinearLayout>
