@@ -135,7 +135,7 @@ public class Juego extends SurfaceView {
     }
 
     public boolean juegoTerminado(){
-        boolean fin = vidas==0;
+        boolean fin = vidas<=0;
         return fin;
     }
 
