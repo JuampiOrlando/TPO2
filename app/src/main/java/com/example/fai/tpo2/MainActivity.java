@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -31,6 +34,12 @@ public class MainActivity extends Activity {
     //PARA LA CREACION DE LA BASE DE DATOS
     private DBranking dataSource;
 
+    //si var en 0 musica de fondo activada, en 1 musica silenciada
+    public static int musicaFondoSilenciada=0;
+
+    //si var en 0 efectos de sonido activados, en 1 efectos de sonido silenciados
+    public static int efectosSilenciados=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +59,7 @@ public class MainActivity extends Activity {
 
     public void onClickJugar(View v) {
 /*
+
         //Podriamos usar un Toast si quisieramos
         Context context = getApplicationContext();
         CharSequence text = "Bienvenido!!";
@@ -79,9 +89,40 @@ public class MainActivity extends Activity {
         AlertDialog alert11 = builder1.create();
         alert11.show();
 
+
+    }
+
+    public void onClickCheckBox1(View v){
+        //control musica de fondo
+        CheckBox checkBox1 = (CheckBox) v;
+
+                if (checkBox1.isChecked()) {
+                    //tic en caja
+                    musicaFondoSilenciada = 1;
+
+                } else {
+                    musicaFondoSilenciada = 0;
+                 }
+    }
+
+    public void onClickCheckBox2(View v){
+        //control efectos de sonido
+        CheckBox checkBox2 = (CheckBox) v;
+
+                if(checkBox2.isChecked()){
+                    //tic en caja
+                    efectosSilenciados=1;
+
+                }else {
+                    efectosSilenciados=0;
+                }
+
     }
 
     public void onClickSalir(View v){
+        //resetear variables al salir
+        musicaFondoSilenciada=0;
+        efectosSilenciados=0;
         finish();
     }
 
@@ -159,6 +200,11 @@ public class MainActivity extends Activity {
     @Override
     public void onStop() {
         super.onStop();
+
+        // esto es para cuando se sale del juego sin clickear el boton del menu salir
+        // las variables se deben resetear al salir
+        musicaFondoSilenciada=0;
+        efectosSilenciados=0;
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
