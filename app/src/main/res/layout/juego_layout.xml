@@ -26,6 +26,19 @@
             android:layout_weight="1"
             android:textSize="20sp"
             />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Musica"
+            android:textColor="#ffffffff"
+            android:textColorHint="#ffffffff"
+            android:id="@+id/cajaM"
+            android:checked="true"
+            android:clickable="true"
+            android:textOn="Musica"
+            android:textOff="Silenciado" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
