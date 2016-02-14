@@ -22,6 +22,9 @@
             android:label="TPO2"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity android:name=".PopNickname"
+            android:theme="@style/AppTheme.popNickname" >
+        </activity>
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
