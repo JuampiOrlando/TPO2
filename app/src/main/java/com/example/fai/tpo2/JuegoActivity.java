@@ -14,6 +14,8 @@ public class JuegoActivity extends Activity {
 
     MediaPlayer musicaFondo;
 
+    // para controlar musica de fondo
+    private int musicaFondoTic = MainActivity.musicaFondoSilenciada;
 
 
     @Override
@@ -27,10 +29,12 @@ public class JuegoActivity extends Activity {
 
         this.agregarJuego();
 
-        musicaFondo = MediaPlayer.create(this,R.raw.musicafondo);
-        musicaFondo.setLooping(true);
-        musicaFondo.start();
-
+        // Si no hay tic, se inicia la musica
+        if (musicaFondoTic == 0) {
+           musicaFondo = MediaPlayer.create(this,R.raw.musicafondo);
+           musicaFondo.setLooping(true);
+           musicaFondo.start();
+        }
         Context context = getApplicationContext();
         CharSequence txt = getResources().getString(R.string.mensaje);
         int duration = Toast.LENGTH_LONG;
@@ -67,7 +71,10 @@ public class JuegoActivity extends Activity {
 
     protected void onPause(){
         super.onPause();
-        musicaFondo.release();
+        // Solo si no hay tic se debe cortar la musica
+        if (musicaFondoTic == 0) {
+            musicaFondo.release();
+        }
         finish();
     }
 

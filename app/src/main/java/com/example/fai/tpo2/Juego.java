@@ -44,6 +44,9 @@ public class Juego extends SurfaceView {
 
     private int numeroMaximoSprites = 12;
 
+    // para controlar efectos de sonido
+    private int efectosTic = MainActivity.efectosSilenciados;
+
 
     public Juego(JuegoActivity context) {
         super(context);
@@ -236,6 +239,7 @@ public class Juego extends SurfaceView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
         if (System.currentTimeMillis() - lastClick > 50) {
             lastClick = System.currentTimeMillis();
             float x = event.getX();
@@ -243,24 +247,36 @@ public class Juego extends SurfaceView {
 
 
             synchronized (getHolder()) {
-                for (int i = sprites.size() - 1; i >= 0; i--) {
-                    Sprite sprite = sprites.get(i);
-                    if (sprite.isCollition(x, y)) {
-                        if(sprite.seMurio()){
-                            sprites.remove(sprite);
+                if( !sprites.isEmpty()){
+                   boolean tocado= false;
+                   int i = sprites.size() - 1;
+                   //for (int i = sprites.size() - 1; i >= 0; i--) {
+                   while( tocado==false && i>=0){
 
-                            contador++;
-                            contadorVisual.setText(""+contador);
+                      Sprite sprite = sprites.get(i);
 
-                            temps.add(new TempSprite(temps, this, x, y, bmpBlood));
+                      if (sprite.isCollition(x, y)) {
+                         tocado=true;
+                         if(sprite.seMurio()){
+                             sprites.remove(sprite);
+
+                             contador++;
+                             contadorVisual.setText(""+contador);
+
+                             temps.add(new TempSprite(temps, this, x, y, bmpBlood));
                         }
 
-                        //mp.start();
-                        sonido.play(sonidito, 1, 1, 0, 0, 1.5F);
+                         //mp.start();
 
+                         // Si no hay tic, se reproducen efectos de sonido
+                         if (efectosTic == 0){
+                             sonido.play(sonidito, 1, 1, 0, 0, 1.5F);
+                         }
 
-                        break;
-                    }
+                         //break;
+                      }
+                      i--;
+                   }
                 }
             }
         }

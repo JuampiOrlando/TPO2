@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:background="@drawable/app_hack_android"
 
@@ -54,6 +55,30 @@
             android:layout_alignParentEnd="true"
             android:onClick="onClickSalir"
             android:textSize="20sp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/musica_silenciada"
+            android:id="@+id/checkBox1"
+            android:textColor="#ffffff"
+            android:buttonTint="#ffffff"
+            android:layout_above="@+id/checkBox2"
+            android:layout_alignStart="@+id/checkBox2"
+            android:onClick="onClickCheckBox1" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sonidos_silenciados"
+            android:id="@+id/checkBox2"
+            android:layout_marginBottom="24dp"
+            android:textColor="#ffffff"
+            android:buttonTint="#ffffff"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="onClickCheckBox2"/>
+
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="0dip"

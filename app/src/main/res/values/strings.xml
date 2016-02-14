@@ -9,6 +9,8 @@
     <string name="stats">Ranking</string>
     <string name="exit">Salir</string>
     <string name="fin">Juego terminado :D</string>
+    <string name="musica_silenciada">Silenciar musica de fondo</string>
+    <string name="sonidos_silenciados">Silenciar efectos de sonido</string>
 
 
     <color name="black">#000000</color>
