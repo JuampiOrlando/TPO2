@@ -28,10 +28,17 @@ public class MainActivity extends Activity {
      */
     private GoogleApiClient client;
 
+    //PARA LA CREACION DE LA BASE DE DATOS
+    private DBranking dataSource;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_principal);
+
+
+        //CREAMOS LA BASE DE DATOS.
+        dataSource = new DBranking(this);
 
        // textBox = (EditText) findViewById(R.id.txtText1);
         //puntitos = (TextView) findViewById(R.id.Puntos);
