@@ -40,10 +40,10 @@ public class JuegoActivity extends Activity {
             public void onClick(View v) {
 
                 if (musica.isChecked()) {
-                    // mediaplayer is already muted, so needs be to unmuted
+                    // si esta pausado regresa al ultimo estado de la musica
                     musicaFondo.start();
                 } else {
-                    // mute media player
+                    // pausa la musica
                     musicaFondo.pause();
                 }
             }
