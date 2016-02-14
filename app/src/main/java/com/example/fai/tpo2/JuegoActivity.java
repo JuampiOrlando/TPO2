@@ -6,14 +6,16 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class JuegoActivity extends Activity {
 
     MediaPlayer musicaFondo;
-
+    ToggleButton musica;
 
 
     @Override
@@ -30,6 +32,22 @@ public class JuegoActivity extends Activity {
         musicaFondo = MediaPlayer.create(this,R.raw.musicafondo);
         musicaFondo.setLooping(true);
         musicaFondo.start();
+
+        musica = (ToggleButton) findViewById(R.id.cajaM);
+        musica.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (musica.isChecked()) {
+                    // mediaplayer is already muted, so needs be to unmuted
+                    musicaFondo.start();
+                } else {
+                    // mute media player
+                    musicaFondo.pause();
+                }
+            }
+        });
 
         Context context = getApplicationContext();
         CharSequence txt = getResources().getString(R.string.mensaje);
