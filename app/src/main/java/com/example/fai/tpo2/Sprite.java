@@ -25,8 +25,11 @@ public class Sprite {
 
     private int vidas;
 
-    public Sprite(Juego gameView, Bitmap bmp,int vidasP) {
+    private boolean bueno;
 
+    public Sprite(Juego gameView, Bitmap bmp,int vidasP, boolean spriteBueno) {
+
+        this.bueno=spriteBueno;
 
         this.width = bmp.getWidth() / BMP_COLUMNS;
         this.height = bmp.getHeight() / BMP_ROWS;
@@ -97,6 +100,10 @@ public class Sprite {
 
     public int getVidas(){
         return vidas;
+    }
+
+    public boolean esBueno(){
+        return bueno;
     }
 
     public boolean sobrevivio(){

@@ -200,12 +200,6 @@ public class MainActivity extends Activity {
     @Override
     public void onStop() {
         super.onStop();
-
-        // esto es para cuando se sale del juego sin clickear el boton del menu salir
-        // las variables se deben resetear al salir
-        musicaFondoSilenciada=0;
-        efectosSilenciados=0;
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
