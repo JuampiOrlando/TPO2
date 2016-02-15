@@ -2,23 +2,13 @@ package com.example.fai.tpo2;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
-<<<<<<< HEAD
-=======
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
->>>>>>> 631e3dc307f92f84a3b6aa53b9d18eb948e2fdd7
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -175,15 +165,13 @@ public class MainActivity extends Activity {
         client.disconnect();
     }
 
-<<<<<<< HEAD
 
-=======
     public static void agregarRanking(String nombre, String puntaje){
          dataSource.insertarTupla(nombre, puntaje);
     }
     public static Cursor getAllRecords(){
         return dataSource.getAllRecords();
     }
->>>>>>> 631e3dc307f92f84a3b6aa53b9d18eb948e2fdd7
+
 
 }
