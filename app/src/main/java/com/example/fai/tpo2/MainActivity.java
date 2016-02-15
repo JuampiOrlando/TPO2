@@ -2,12 +2,23 @@ package com.example.fai.tpo2;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
+<<<<<<< HEAD
+=======
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+>>>>>>> 631e3dc307f92f84a3b6aa53b9d18eb948e2fdd7
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -24,7 +35,7 @@ public class MainActivity extends Activity {
     private GoogleApiClient client;
 
     //PARA LA CREACION DE LA BASE DE DATOS
-    private esquemaBDranking dataSource;
+    private static esquemaBDranking dataSource;
 
     //si var en 0 musica de fondo activada, en 1 musica silenciada
     public static int musicaFondoSilenciada=0;
@@ -118,56 +129,12 @@ public class MainActivity extends Activity {
         finish();
     }
 
-    /*public void onClickGuardar(View v) {
-        String str = textBox.getText().toString();
-        try {
-            FileOutputStream fos = openFileOutput("textFile.txt", MODE_PRIVATE);
-            OutputStreamWriter osw = new OutputStreamWriter(fos);
+    public void onClickRanking(View v){
+        Intent intent = new Intent(this,RankingActivity.class);
+        startActivity(intent);
 
-            // Escribimos el String en el archivo
-            osw.write("\n" + str);
-            osw.flush();
-            osw.close();
-
-            // Mostramos que se ha guardado
-            Toast.makeText(getBaseContext(), "Guardado", Toast.LENGTH_SHORT).show();
-
-            textBox.setText("");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-    }*/
-
-   /* public void onClickRanking(View v) {
-        try {
-            FileInputStream fis = openFileInput("textFile.txt");
-            InputStreamReader isr = new InputStreamReader(fis);
-
-            char[] inputBuffer = new char[READ_BLOCK_SIZE];
-            String s = "";
-
-            int charRead;
-            while ((charRead = isr.read(inputBuffer)) > 0) {
-                // Convertimos los char a String
-                String readString = String.copyValueOf(inputBuffer, 0, charRead);
-                s += readString;
-
-                inputBuffer = new char[READ_BLOCK_SIZE];
-            }
-
-            // Establecemos en el visor el texto que hemos leido
-            puntitos.setText(s);
-
-            // Mostramos un Toast con el proceso completado
-            Toast.makeText(getBaseContext(), "Cargado", Toast.LENGTH_SHORT).show();
-
-            isr.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
     }
-    */
+
     //Esto se autogenero solo! Dsps debemos revisar!
     @Override
     public void onStart() {
@@ -192,12 +159,6 @@ public class MainActivity extends Activity {
     @Override
     public void onStop() {
         super.onStop();
-
-        // esto es para cuando se sale del juego sin clickear el boton del menu salir
-        // las variables se deben resetear al salir
-        musicaFondoSilenciada=0;
-        efectosSilenciados=0;
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
@@ -214,6 +175,15 @@ public class MainActivity extends Activity {
         client.disconnect();
     }
 
+<<<<<<< HEAD
 
+=======
+    public static void agregarRanking(String nombre, String puntaje){
+         dataSource.insertarTupla(nombre, puntaje);
+    }
+    public static Cursor getAllRecords(){
+        return dataSource.getAllRecords();
+    }
+>>>>>>> 631e3dc307f92f84a3b6aa53b9d18eb948e2fdd7
 
 }

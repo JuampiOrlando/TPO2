@@ -26,7 +26,10 @@ public class Juego extends SurfaceView {
 
     //private MediaPlayer mp;
     private SoundPool sonido = new SoundPool(10, AudioManager.STREAM_MUSIC,0);
-    private int sonidito;
+    private int disparo;
+    private int splash;
+    private int scream;
+    private int woah;
     private JuegoActivity actividadJ;
     private TextView puntos;
 
@@ -57,7 +60,10 @@ public class Juego extends SurfaceView {
 
         //mp = MediaPlayer.create(context, R.raw.smw_coin);
 
-        sonidito = sonido.load(context,R.raw.bum,1);
+        disparo = sonido.load(context,R.raw.gun,1);
+        splash = sonido.load(context,R.raw.splat,1);
+        scream = sonido.load(context,R.raw.scream,1);
+        woah = sonido.load(context,R.raw.woah_male,1);
 
         getHolder().addCallback(new SurfaceHolder.Callback() {
 
@@ -121,15 +127,27 @@ public class Juego extends SurfaceView {
         Random rnd = new Random();
 
         if(sprites.size()<numeroMaximoSprites){
-
+            if (!comprobarBueno()){
+                sprites.add(createSpriteBueno());
+            }
             int diferencia = numeroMaximoSprites-sprites.size();
 
             for(int i = 0; i < diferencia; i++){
                 sprites.add(createSprite((rnd.nextInt(10) + 1)));
             }
+
         }
 
 
+    }
+
+    public boolean comprobarBueno(){
+        boolean res=false;
+        for(Sprite sprite : sprites){
+            if(sprite.esBueno())
+                res=true;
+        }
+        return res;
     }
 
     public boolean juegoTerminado(){
@@ -205,7 +223,14 @@ public class Juego extends SurfaceView {
         }
 
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resouce);
-        return new Sprite(this, bmp,vidas);
+        return new Sprite(this, bmp,vidas,false);
+    }
+
+    private Sprite createSpriteBueno() {
+        int resouce;
+        resouce = R.drawable.general;
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(), resouce);
+        return new Sprite(this, bmp,3,true);
     }
 
     public void actualizarArregloSprites(){
@@ -229,26 +254,26 @@ public class Juego extends SurfaceView {
         for (Sprite sprite : sprites) {
 
             if(sprite.sobrevivio()){
-                vidas = vidas - 1;
-                actividadJ.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        vidasVisual.setText("" + vidas);
+                if(!sprite.esBueno()){
+                    if (efectosTic == 0){
+                        sonido.play(scream, 1, 1, 0, 0, 1.5F);
                     }
-                });
-                        sprite.matarSprite();
-
-                    }
-
-                    else
-
-                    {
-                        sprite.onDraw(canvas);
-                    }
+                    vidas = vidas - 1;
+                    actividadJ.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            vidasVisual.setText("" + vidas);
+                        }
+                    });
+                 }
+                sprite.matarSprite();
+            } else {
+                sprite.onDraw(canvas);
+            }
 
 
                 }
-            }
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -269,25 +294,42 @@ public class Juego extends SurfaceView {
                       Sprite sprite = sprites.get(i);
 
                       if (sprite.isCollition(x, y)) {
-                         tocado=true;
-                         if(sprite.seMurio()){
+                          tocado=true;
+                          if(sprite.seMurio()){
+
+                             if(sprite.esBueno()){
+                                 vidas = vidas - 1;
+                                 actividadJ.runOnUiThread(new Runnable() {
+                                     @Override
+                                     public void run() {
+                                         vidasVisual.setText("" + vidas);
+                                     }
+                                 });
+
+                             }else{
+                                 contador++;
+                                 contadorVisual.setText(""+contador);
+                             }
+                             if (efectosTic == 0){
+                                 sonido.play(splash, 1, 1, 0, 0, 1.5F);
+                             }
                              sprites.remove(sprite);
-
-                             contador++;
-                             contadorVisual.setText(""+contador);
-
                              temps.add(new TempSprite(temps, this, x, y, bmpBlood));
-                        }
+                          }else{
 
+                              if (efectosTic == 0){
+                                if(sprite.esBueno()){
+                                    sonido.play(woah, 1, 1, 0, 0, 1.5F);
+                                }else{
+                                    sonido.play(disparo, 1, 1, 0, 0, 1.5F);
+                                }
+                              }
+                          }
+                      }
                          //mp.start();
 
-                         // Si no hay tic, se reproducen efectos de sonido
-                         if (efectosTic == 0){
-                             sonido.play(sonidito, 1, 1, 0, 0, 1.5F);
-                         }
-
                          //break;
-                      }
+
                       i--;
                    }
                 }

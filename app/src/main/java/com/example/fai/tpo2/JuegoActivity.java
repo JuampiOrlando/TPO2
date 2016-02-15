@@ -18,6 +18,7 @@ public class JuegoActivity extends Activity {
     ToggleButton musica;
     private Juego surface_vista;
 
+    private int musicaFondoTic = MainActivity.musicaFondoSilenciada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +31,16 @@ public class JuegoActivity extends Activity {
 
         this.agregarJuego();
 
-        musicaFondo = MediaPlayer.create(this,R.raw.musicafondo);
-        musicaFondo.setLooping(true);
-        musicaFondo.start();
+        if (musicaFondoTic==0){
+           musicaFondo = MediaPlayer.create(this,R.raw.musicafondo);
+           musicaFondo.setLooping(true);
+           musicaFondo.start();
 
-        musica = (ToggleButton) findViewById(R.id.cajaM);
-        musica.setOnClickListener(new View.OnClickListener() {
+           musica = (ToggleButton) findViewById(R.id.cajaM);
+           musica.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
+             @Override
+             public void onClick(View v) {
 
                 if (musica.isChecked()) {
                     // si esta pausado regresa al ultimo estado de la musica
@@ -46,9 +48,17 @@ public class JuegoActivity extends Activity {
                 } else {
                     // pausa la musica
                     musicaFondo.pause();
-                }
-            }
-        });
+                 }
+             }
+           });
+        } else{
+            musica = (ToggleButton) findViewById(R.id.cajaM);
+            ///queda silenciado
+            musica.toggle();
+
+        }
+
+
 
         Context context = getApplicationContext();
         CharSequence txt = getResources().getString(R.string.mensaje);
@@ -86,7 +96,9 @@ public class JuegoActivity extends Activity {
 
     protected void onPause(){
         super.onPause();
-        musicaFondo.release();
+        if (musicaFondoTic==0){
+          musicaFondo.release();
+        }
         finish();
     }
 
