@@ -57,6 +57,7 @@ public class Juego extends SurfaceView {
         vidasVisual = (TextView)actividadJ.findViewById(R.id.vidas);
         gameLoopThread = new HiloJuego(this);
 
+        final Juego a = this;
 
         //mp = MediaPlayer.create(context, R.raw.smw_coin);
 
@@ -70,7 +71,6 @@ public class Juego extends SurfaceView {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
-
                 System.out.println("Termino?");
                 boolean retry = true;
                 gameLoopThread.setRunning(false);
@@ -85,9 +85,20 @@ public class Juego extends SurfaceView {
 
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                comprobarYgenerarSprites();
-                gameLoopThread.setRunning(true);
-                gameLoopThread.start();
+                if (gameLoopThread .getState() == Thread.State.TERMINATED)
+                {
+
+                    gameLoopThread =new HiloJuego(a);
+                    comprobarYgenerarSprites();
+                    gameLoopThread.setRunning(true);
+                    gameLoopThread.start();
+                }
+                else
+                {
+                    comprobarYgenerarSprites();
+                    gameLoopThread.setRunning(true);
+                    gameLoopThread.start();
+                }
             }
 
             @Override

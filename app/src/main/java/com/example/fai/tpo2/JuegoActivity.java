@@ -99,7 +99,7 @@ public class JuegoActivity extends Activity {
         if (musicaFondoTic==0){
           musicaFondo.release();
         }
-        finish();
+        //finish();
     }
 
     private void agregarJuego(){
@@ -122,7 +122,7 @@ public class JuegoActivity extends Activity {
 
     }
 
-    @Override
+    /*@Override
     protected void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
 
@@ -130,5 +130,5 @@ public class JuegoActivity extends Activity {
         //surface_vista.setVidas(savedInstanceState.getInt("vidas"));
 
 
-    }
+    }*/
 }
