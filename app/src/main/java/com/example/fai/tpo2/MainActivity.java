@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
     private GoogleApiClient client;
 
     //PARA LA CREACION DE LA BASE DE DATOS
-    private DBranking dataSource;
+    private esquemaBDranking dataSource;
 
     //si var en 0 musica de fondo activada, en 1 musica silenciada
     public static int musicaFondoSilenciada=0;
@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 
 
         //CREAMOS LA BASE DE DATOS.
-        dataSource = new DBranking(this);
+        dataSource = new esquemaBDranking(this);
 
        // textBox = (EditText) findViewById(R.id.txtText1);
         //puntitos = (TextView) findViewById(R.id.Puntos);

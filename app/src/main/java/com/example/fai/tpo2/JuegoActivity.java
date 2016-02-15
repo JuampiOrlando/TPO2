@@ -6,16 +6,16 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class JuegoActivity extends Activity {
 
     MediaPlayer musicaFondo;
-
-    // para controlar musica de fondo
-    private int musicaFondoTic = MainActivity.musicaFondoSilenciada;
+    ToggleButton musica;
 
 
     @Override
@@ -29,12 +29,26 @@ public class JuegoActivity extends Activity {
 
         this.agregarJuego();
 
-        // Si no hay tic, se inicia la musica
-        if (musicaFondoTic == 0) {
-           musicaFondo = MediaPlayer.create(this,R.raw.musicafondo);
-           musicaFondo.setLooping(true);
-           musicaFondo.start();
-        }
+        musicaFondo = MediaPlayer.create(this,R.raw.musicafondo);
+        musicaFondo.setLooping(true);
+        musicaFondo.start();
+
+        musica = (ToggleButton) findViewById(R.id.cajaM);
+        musica.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (musica.isChecked()) {
+                    // si esta pausado regresa al ultimo estado de la musica
+                    musicaFondo.start();
+                } else {
+                    // pausa la musica
+                    musicaFondo.pause();
+                }
+            }
+        });
+
         Context context = getApplicationContext();
         CharSequence txt = getResources().getString(R.string.mensaje);
         int duration = Toast.LENGTH_LONG;
@@ -71,10 +85,7 @@ public class JuegoActivity extends Activity {
 
     protected void onPause(){
         super.onPause();
-        // Solo si no hay tic se debe cortar la musica
-        if (musicaFondoTic == 0) {
-            musicaFondo.release();
-        }
+        musicaFondo.release();
         finish();
     }
 

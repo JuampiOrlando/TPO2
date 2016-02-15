@@ -162,7 +162,9 @@ public class Juego extends SurfaceView {
     }
 
     public void getNickname(){
-        System.out.println("pedimos los datos!!!!!!!!");
+        Intent intent = new Intent(actividadJ,PopNickname.class);
+        intent.putExtra("EXTRA_PUNTAJE", (""+contador));
+        actividadJ.startActivity(intent);
     }
 
 
