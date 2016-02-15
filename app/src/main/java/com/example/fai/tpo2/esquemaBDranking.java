@@ -60,4 +60,11 @@ public class esquemaBDranking {
         database.insert(RANKING_TABLE_NAME,null,values);
     }
 
+    public Cursor getAllRecords(){
+        Cursor c = database.query(RANKING_TABLE_NAME, null, null, null, null, null, ColumnasRanking.PUNTAJE_RANKING+" DESC", null);
+
+        return c;
+    }
+
+
 }

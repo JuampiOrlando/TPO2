@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -11,6 +12,8 @@ import android.widget.TextView;
  */
 public class PopNickname extends Activity {
 
+    private String puntaje;
+    private TextView puntajeVisual;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +31,16 @@ public class PopNickname extends Activity {
 
         //Obteniendo el puntaje
         Bundle extras = getIntent().getExtras();
-        String puntaje = extras.getString("EXTRA_PUNTAJE");
+        puntaje = extras.getString("EXTRA_PUNTAJE");
 
 
-        TextView puntajeVisual = (TextView) findViewById(R.id.puntaje);
+        puntajeVisual = (TextView) findViewById(R.id.puntaje);
         puntajeVisual.setText(puntaje);
 
     }
     public void onClickEnviar(View v) {
-
+        EditText nickVisual = (EditText) findViewById(R.id.nickname);
+        MainActivity.agregarRanking(nickVisual.getText().toString(),puntaje);
+        this.finish();
     }
 }
