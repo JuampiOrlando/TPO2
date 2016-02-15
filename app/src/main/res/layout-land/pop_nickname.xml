@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#13194c">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Ingrese al Ranking!"
+        android:id="@+id/textView"
+        android:layout_marginTop="51dp"
+        android:textColor="#e0dada"
+        android:textSize="30sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Puntaje:"
+                android:textSize="25sp"
+                android:textColor="#e0dada"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/puntaje"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="0"
+                android:textSize="25sp"
+                android:textColor="#e0dada"/>
+
+        </LinearLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nickname?"
+            android:textSize="25sp"
+            android:textColor="#9e8c8c"
+            android:layout_marginLeft="45dp"
+            android:textColorHint="#9e8c8c"
+            android:layout_marginTop="50dp"
+            />
+
+        <Button
+            android:layout_width="321dp"
+            android:layout_height="wrap_content"
+            android:text="ENVIAR"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:onClick="onClickEnviar"/>
+    </LinearLayout>
+
+</RelativeLayout>

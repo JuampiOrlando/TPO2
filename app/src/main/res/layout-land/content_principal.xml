@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@drawable/app_hack_android"
+
+
+    >
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.7">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+
+            android:id="@+id/linearLayout">
+            <Button android:id="@+id/btnJugar"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:onClick="onClickJugar"
+                android:text="@string/play"
+                android:textSize="20sp"
+                android:layout_weight="1"
+
+                />
+
+            <Button android:id="@+id/btnRanking"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:onClick="onClickRanking"
+                android:text="@string/stats"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="@string/exit"
+                android:id="@+id/botonSalir"
+                android:layout_below="@+id/linearLayout"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:onClick="onClickSalir"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
+
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/musica_silenciada"
+                android:id="@+id/checkBox1"
+                android:textColor="#ffffff"
+                android:layout_above="@+id/checkBox2"
+                android:layout_alignStart="@+id/checkBox2"
+                android:layout_gravity="center"
+                android:onClick="onClickCheckBox1"
+                android:layout_weight="1"
+                android:buttonTint="#0dcf27"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/sonidos_silenciados"
+                android:id="@+id/checkBox2"
+                android:textColor="#ffffff"
+                android:onClick="onClickCheckBox2"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:buttonTint="#0dcf27" />
+         </LinearLayout>
+
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.15">
+    </RelativeLayout>
+     <!-- Estos, son para agregar dsps! (No iria aca!)
+     <TextView
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:text="Introduzca algún texto"/>
+     <EditText
+         android:id="@+id/txtText1"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"/> -->
+
+    <!-- Esta funcion no va aca! Es para registrar el nick y el rankin!
+    <Button android:id="@+id/btnGuardar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickGuardar"
+        android:text="Guardar"/>
+        -->
+
+    <!--
+    <TextView android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/Puntos"
+        android:layout_weight="0.10"/>
+        -->
+</LinearLayout>

@@ -8,18 +8,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
 public class MainActivity extends Activity {
     //private EditText textBox;
@@ -221,4 +213,7 @@ public class MainActivity extends Activity {
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
     }
+
+
+
 }

@@ -1,16 +1,11 @@
 package com.example.fai.tpo2;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -97,6 +92,14 @@ public class Juego extends SurfaceView {
         bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
     }
 
+    public int getVidas() {
+        return vidas;
+    }
+
+    public void setVidas(int vidas) {
+        this.vidas = vidas;
+    }
+
     /*private void createSprites() {
         sprites.add(createSprite(R.drawable.asd, 5));
         sprites.add(createSprite(R.drawable.asd,1));
@@ -140,12 +143,20 @@ public class Juego extends SurfaceView {
         temps.clear();
         gameLoopThread.setRunning(false);
         actividadJ.finish();
+        gameLoopThread.setTerminar(true);
 
+    }
+
+    public void pausarHilo(){
+        gameLoopThread.setRunning(false);
+    }
+    public void desPausarHilo(){
+        gameLoopThread.setRunning(true);
     }
 
     public void getNickname(){
         Intent intent = new Intent(actividadJ,PopNickname.class);
-        intent.putExtra("EXTRA_PUNTAJE", (""+contador));
+        intent.putExtra("EXTRA_PUNTAJE", ("" + contador));
         actividadJ.startActivity(intent);
     }
 

@@ -42,29 +42,62 @@ public class Sprite {
         //////////////////////////////////////////////////////////////
         //  4 Carriles
 
-        int maximo = gameView.getHeight();
-        System.out.println("maximo: " + maximo);
-        int divisor = maximo / 4;
-        System.out.println("divisor: " + divisor);
 
-        int carril = rnd.nextInt(4);
-
-        System.out.println("carril: " + carril);
-        y = carril * divisor;
-        System.out.println("y: " + y);
 
 
 
 
         //////////////////////////
-        xSpeed = rnd.nextInt(MAX_SPEED * 5) + 1;
-        //ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
-        ySpeed = 0;
+        if(gameView.getHeight() > gameView.getWidth()){
+            //portrail
+
+            int maximo = gameView.getWidth();
+            System.out.println("maximo: " + maximo);
+            int divisor = maximo / 4;
+            System.out.println("divisor: " + divisor);
+
+            int carril = rnd.nextInt(4);
+
+            System.out.println("carril: " + carril);
+            x = carril * divisor;
+            System.out.println("x: " + x);
+
+            xSpeed = rnd.nextInt(MAX_SPEED * 5) + 1;
+            //ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
+            ySpeed = 0;
+        }else{
+            //landscape
+
+            int maximo = gameView.getHeight();
+            System.out.println("maximo: " + maximo);
+            int divisor = maximo / 4;
+            System.out.println("divisor: " + divisor);
+
+            int carril = rnd.nextInt(4);
+
+            System.out.println("carril: " + carril);
+            y = carril * divisor;
+            System.out.println("y: " + y);
+
+
+            xSpeed = rnd.nextInt(MAX_SPEED * 5) + 1;
+            //ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
+            ySpeed = 0;
+        }
+
     }
 
     private void update() {
-        x = x + xSpeed;
-        currentFrame = ++currentFrame % BMP_COLUMNS;
+        if(gameView.getHeight() > gameView.getWidth()) {
+            //portrail
+            y = y + xSpeed;
+            currentFrame = ++currentFrame % BMP_COLUMNS;
+        }else{
+            //landscape
+            x = x + xSpeed;
+            currentFrame = ++currentFrame % BMP_COLUMNS;
+        }
+
     }
 
     public void onDraw(Canvas canvas) {
@@ -101,10 +134,19 @@ public class Sprite {
 
     public boolean sobrevivio(){
         boolean resultado = false;
+        if(gameView.getHeight() > gameView.getWidth()) {
+            //portrail
+            if (y + width >= gameView.getHeight() ){
+                resultado = true;
+            }
 
-        if (x + width >= gameView.getWidth() ){
-            resultado = true;
+        }else{
+            //landscape
+            if (x + width >= gameView.getWidth() ){
+                resultado = true;
+            }
         }
+
 
         return resultado;
     }

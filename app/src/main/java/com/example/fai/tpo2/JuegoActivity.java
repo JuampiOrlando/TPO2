@@ -16,6 +16,7 @@ public class JuegoActivity extends Activity {
 
     MediaPlayer musicaFondo;
     ToggleButton musica;
+    private Juego surface_vista;
 
 
     @Override
@@ -90,13 +91,32 @@ public class JuegoActivity extends Activity {
     }
 
     private void agregarJuego(){
-        Juego surface_vista = new Juego(this);
+        surface_vista = new Juego(this);
         LinearLayout contenedor;
         contenedor = (LinearLayout) findViewById(R.id.linear_juego);
         LinearLayout.LayoutParams parametros = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         parametros.height=0;
         parametros.weight = (float) 0.9;
-        contenedor.addView(surface_vista,parametros);
+        contenedor.addView(surface_vista, parametros);
     }
 
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putInt("vidas", 3);
+
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+
+        //agregarJuego();
+        //surface_vista.setVidas(savedInstanceState.getInt("vidas"));
+
+
+    }
 }
