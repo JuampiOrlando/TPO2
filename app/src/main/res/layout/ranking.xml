@@ -2,15 +2,44 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:stretchColumns="0,1"
+    android:stretchColumns="0,1,2,3,4"
     android:id="@+id/tabla_ranking">
     <TableRow
         android:paddingTop="10dp">
         <TextView
             android:layout_column="0"
+            android:text="POSICION"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_height="match_parent"
+            >
+
+            <!-- Linea vertical -->
+            <View
+                android:layout_height="match_parent"
+                android:layout_width="1dp"
+                android:background="#BDCAD2"/>
+
+        </LinearLayout>
+        <TextView
+            android:layout_column="0"
             android:text="NICKNAME"
             android:textSize="20sp"
             android:textStyle="bold" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+
+            <!-- Linea vertical -->
+            <View
+                android:layout_height="match_parent"
+                android:layout_width="1dp"
+                android:background="#BDCAD2"/>
+
+        </LinearLayout>
         <TextView
             android:text="PUNTAJE"
             android:gravity="right"

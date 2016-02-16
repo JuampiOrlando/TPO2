@@ -36,13 +36,12 @@ public class Juego extends SurfaceView {
     private TextView puntos;
 
     private int contador;
-
-
-
     private int vidas;
     private TextView contadorVisual;
     private TextView vidasVisual;
     private ImageView corazones;
+
+    private boolean paused;
 
 
     private int numeroMaximoSprites = 12;
@@ -131,6 +130,9 @@ public class Juego extends SurfaceView {
     }
     public Juego(JuegoActivity context) {
         super(context);
+
+        paused = false;
+
         actividadJ = context;
 
         contador = 0;
@@ -219,20 +221,7 @@ public class Juego extends SurfaceView {
         this.vidas = vidas;
     }
 
-    /*private void createSprites() {
-        sprites.add(createSprite(R.drawable.asd, 5));
-        sprites.add(createSprite(R.drawable.asd,1));
-        sprites.add(createSprite(R.drawable.asd,1));
-        sprites.add(createSprite(R.drawable.asd,1));
-        sprites.add(createSprite(R.drawable.asd,1));
-        sprites.add(createSprite(R.drawable.asd,1));
-        sprites.add(createSprite(R.drawable.asd,1));
-        sprites.add(createSprite(R.drawable.asd,1));
-        sprites.add(createSprite(R.drawable.asd, 1));
-        sprites.add(createSprite(R.drawable.asd, 1));
-        sprites.add(createSprite(R.drawable.asd, 1));
-        sprites.add(createSprite(R.drawable.asd,1));
-    }*/
+
 
 
     public void comprobarYgenerarSprites(){
@@ -296,11 +285,34 @@ public class Juego extends SurfaceView {
     }
 
     public void pausarHilo(){
+        boolean retry = true;
         gameLoopThread.setRunning(false);
+        while (retry) {
+            try {
+                gameLoopThread.join();
+                retry = false;
+            } catch (InterruptedException e) {
+            }
+        }
     }
     public void desPausarHilo(){
-        gameLoopThread.setRunning(true);
+        if (gameLoopThread .getState() == Thread.State.TERMINATED)
+        {
+
+            gameLoopThread =new HiloJuego(this);
+            comprobarYgenerarSprites();
+            gameLoopThread.setRunning(true);
+            gameLoopThread.start();
+        }
+        else
+        {
+            comprobarYgenerarSprites();
+            gameLoopThread.setRunning(true);
+            if(!gameLoopThread.isAlive())
+                gameLoopThread.start();
+        }
     }
+
 
     public void getNickname(){
         Intent intent = new Intent(actividadJ,PopNickname.class);
@@ -357,6 +369,7 @@ public class Juego extends SurfaceView {
                 resouce = R.drawable.mini_bad6;
 
         }
+
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resouce);
         return bmp;
     }
@@ -421,27 +434,41 @@ public class Juego extends SurfaceView {
                 }
     }
 
+    public void pausar(){
+        this.pausarHilo();
+        paused = true;
+    }
+    public void despausar(){
+        this.desPausarHilo();
+        paused = false;
+    }
+
+    public HiloJuego getGameLoopThread() {
+        return gameLoopThread;
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        if (System.currentTimeMillis() - lastClick > 50) {
-            lastClick = System.currentTimeMillis();
-            float x = event.getX();
-            float y = event.getY();
+        if(!paused) {
+            if (System.currentTimeMillis() - lastClick > 50) {
+                lastClick = System.currentTimeMillis();
+                float x = event.getX();
+                float y = event.getY();
 
 
-            synchronized (getHolder()) {
-                if( !sprites.isEmpty()){
-                   boolean tocado= false;
-                   int i = sprites.size() - 1;
-                   //for (int i = sprites.size() - 1; i >= 0; i--) {
-                   while( tocado==false && i>=0){
+                synchronized (getHolder()) {
+                    if (!sprites.isEmpty()) {
+                        boolean tocado = false;
+                        int i = sprites.size() - 1;
+                        //for (int i = sprites.size() - 1; i >= 0; i--) {
+                        while (tocado == false && i >= 0) {
 
-                      Sprite sprite = sprites.get(i);
+                            Sprite sprite = sprites.get(i);
 
-                      if (sprite.isCollition(x, y)) {
-                          tocado=true;
-                          if(sprite.seMurio()){
+                            if (sprite.isCollition(x, y)) {
+                                tocado = true;
+                                if (sprite.seMurio()) {
 
                              if(sprite.esBueno()){
                                  vidas = vidas - 1;
@@ -453,32 +480,33 @@ public class Juego extends SurfaceView {
                                      }
                                  });
 
-                             }else{
-                                 contador++;
-                                 contadorVisual.setText(""+contador);
-                             }
-                             if (efectosTic == 0){
-                                 sonido.play(splash, 1, 1, 0, 0, 1.5F);
-                             }
-                             sprites.remove(sprite);
-                             temps.add(new TempSprite(temps, this, x, y, bmpBlood));
-                          }else{
+                                    } else {
+                                        contador++;
+                                        contadorVisual.setText("" + contador);
+                                    }
+                                    if (efectosTic == 0) {
+                                        sonido.play(splash, 1, 1, 0, 0, 1.5F);
+                                    }
+                                    sprites.remove(sprite);
+                                    temps.add(new TempSprite(temps, this, x, y, bmpBlood));
+                                } else {
 
-                              if (efectosTic == 0){
-                                if(sprite.esBueno()){
-                                    sonido.play(woah, 1, 1, 0, 0, 1.5F);
-                                }else{
-                                    sonido.play(disparo, 1, 1, 0, 0, 1.5F);
+                                    if (efectosTic == 0) {
+                                        if (sprite.esBueno()) {
+                                            sonido.play(woah, 1, 1, 0, 0, 1.5F);
+                                        } else {
+                                            sonido.play(disparo, 1, 1, 0, 0, 1.5F);
+                                        }
+                                    }
                                 }
-                              }
-                          }
-                      }
-                         //mp.start();
+                            }
+                            //mp.start();
 
-                         //break;
+                            //break;
 
-                      i--;
-                   }
+                            i--;
+                        }
+                    }
                 }
             }
         }

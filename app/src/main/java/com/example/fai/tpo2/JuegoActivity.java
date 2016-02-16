@@ -2,6 +2,7 @@ package com.example.fai.tpo2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,6 +19,7 @@ public class JuegoActivity extends Activity {
 
     MediaPlayer musicaFondo;
     ToggleButton musica;
+    ToggleButton btnPausa;
     private Juego surface_vista;
 
     private int musicaFondoTic = MainActivity.musicaFondoSilenciada;
@@ -26,9 +28,7 @@ public class JuegoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
 
-
         super.onCreate(savedInstanceState);
-
 
         //setContentView(new Juego(this));
         setContentView(R.layout.juego_layout);
@@ -59,8 +59,40 @@ public class JuegoActivity extends Activity {
             musica = (ToggleButton) findViewById(R.id.cajaM);
             ///queda silenciado
             musica.toggle();
+            musica.setEnabled(false);
+            // tacha reproducir
+            musica.setPaintFlags(musica.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         }
+
+
+
+        btnPausa = (ToggleButton) findViewById(R.id.btnPausa);
+        System.out.println("BOTON: "+(btnPausa!=null));
+        btnPausa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (btnPausa.isChecked()) {
+                    surface_vista.despausar();
+                    if(musicaFondoTic==0 && !musicaFondo.isPlaying() ){
+                        musicaFondo.start();
+                        musica.toggle();
+                    }
+                  } else {
+
+                    surface_vista.pausar();
+
+                    if( musicaFondoTic==0 && musicaFondo.isPlaying()){
+                        musicaFondo.pause();
+                        musica.toggle();
+                    }
+
+
+                }
+            }
+        });
+
 
 
 

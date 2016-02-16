@@ -61,7 +61,7 @@ public class esquemaBDranking {
     }
 
     public Cursor getAllRecords(){
-        Cursor c = database.query(RANKING_TABLE_NAME, null, null, null, null, null, ColumnasRanking.PUNTAJE_RANKING+" DESC", null);
+        Cursor c = database.query(RANKING_TABLE_NAME, null, null, null, null, null, ColumnasRanking.PUNTAJE_RANKING+" DESC", "10");
 
         return c;
     }

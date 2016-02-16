@@ -31,13 +31,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Musica"
-            android:textColor="#ffffffff"
+            android:textColor="#ff000000"
             android:textColorHint="#ffffffff"
             android:id="@+id/cajaM"
             android:checked="true"
             android:clickable="true"
-            android:textOn="Musica"
-            android:textOff="Silenciado" />
+            android:textOn="Silenciar"
+            android:textOff="Reproducir" />
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="||"
+            android:textColor="#ff000000"
+            android:textColorHint="#ffffffff"
+            android:id="@+id/btnPausa"
+            android:checked="true"
+            android:clickable="true"
+            android:textOn="||"
+            android:textOff="|>" />
 
         <TextView
             android:layout_width="0dp"

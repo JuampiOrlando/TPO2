@@ -150,7 +150,6 @@ public class Sprite {
 
         Rect src = new Rect(srcX, srcY, srcX + width, srcY + height);
         Rect dst = new Rect(x, y, x + width, y + height);
-        System.out.println("Rect(x="+x+", y="+y+" ,x + width="+(x + width)+" , y + height = "+(y + height)+")");
         canvas.drawBitmap(bmp, src, dst, null);
 
     }
