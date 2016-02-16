@@ -35,11 +35,12 @@ public class Sprite {
         this.width = bmp.getWidth() / BMP_COLUMNS;
         this.height = bmp.getHeight() / BMP_ROWS;
 
-        vidas = Integer.parseInt(a.get(0));
-        x = Integer.parseInt(a.get(2));
-        y = Integer.parseInt(a.get(1));
-        xSpeed = Integer.parseInt(a.get(3));
-        ySpeed = Integer.parseInt(a.get(4));
+        this.bueno = Integer.parseInt(a.get(5));
+        this.vidas = Integer.parseInt(a.get(0));
+        this.x = Integer.parseInt(a.get(2));
+        this.y = Integer.parseInt(a.get(1));
+        this.xSpeed = Integer.parseInt(a.get(3));
+        this.ySpeed = Integer.parseInt(a.get(4));
 
         //this.orientacionCarriles();
         if(gameView.getHeight() > gameView.getWidth()){

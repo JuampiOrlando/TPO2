@@ -11,7 +11,6 @@ public class HiloJuego extends Thread {
     private Juego view;
     private boolean running = false;
 
-    private boolean terminar = false;
 
     public HiloJuego(Juego view) {
         this.view = view;
@@ -21,13 +20,7 @@ public class HiloJuego extends Thread {
         running = run;
     }
 
-    public boolean getTerminar() {
-        return terminar;
-    }
 
-    public void setTerminar(boolean terminar) {
-        this.terminar = terminar;
-    }
 
     @Override
     public void run() {
@@ -40,8 +33,7 @@ public class HiloJuego extends Thread {
             try {
                 c = view.getHolder().lockCanvas();
                 synchronized (view.getHolder()) {
-                    //if(view.juegoTerminado()) {
-                    if(this.terminar){
+                    if(view.juegoTerminado()) {
                         System.out.println("JUEGO TERMINAOD :D ");
                         view.getNickname();
                         view.terminar();

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class Juego extends SurfaceView {
     private int vidas;
     private TextView contadorVisual;
     private TextView vidasVisual;
-
+    private ImageView corazones;
 
 
     private int numeroMaximoSprites = 12;
@@ -67,6 +68,10 @@ public class Juego extends SurfaceView {
         contadorVisual.setText("" + contador);
         vidasVisual = (TextView)actividadJ.findViewById(R.id.vidas);
         vidasVisual.setText("" + vidas);
+
+        corazones = (ImageView)actividadJ.findViewById(R.id.imageViewCorazones);
+        actualizarVidas();
+
         gameLoopThread = new HiloJuego(this);
 
         final Juego a = this;
@@ -191,6 +196,24 @@ public class Juego extends SurfaceView {
         return contador;
     }
 
+    public void actualizarVidas(){
+        //corazones = (ImageView)actividadJ.findViewById(R.id.corazones1);
+        switch (vidas){
+            case 1:
+                corazones.setImageResource(R.drawable.cor1);
+                //corazones.setBackgroundResource(R.drawable.cor1);
+                break;
+            case 2:
+                corazones.setImageResource(R.drawable.cor2);
+                //corazones.setBackgroundResource(R.drawable.cor2);
+                break;
+            case 3:
+                //corazones.setBackgroundResource(R.drawable.cor3);
+                corazones.setImageResource(R.drawable.cor3);
+                break;
+        }
+    }
+
 
     public void setVidas(int vidas) {
         this.vidas = vidas;
@@ -266,7 +289,6 @@ public class Juego extends SurfaceView {
         temps.clear();
         gameLoopThread.setRunning(false);
         actividadJ.finish();
-        gameLoopThread.setTerminar(true);
     }
 
     public List<Sprite> getSprites() {
@@ -360,7 +382,16 @@ public class Juego extends SurfaceView {
 
         //contadorVisual.setText(""+contador);
 
-        canvas.drawColor(Color.BLUE);
+        canvas.drawColor(Color.BLACK);
+        /*for (int i = 0; i < this.getWidth(); i = i  + 16) {
+            for (int j = 0; j < this.getHeight(); j = j + 16) {
+                Rect src = new Rect(0, 0, 16, 16);
+                Rect dst = new Rect(i, j, i + 16, j + 16);
+                Bitmap bmpPiso = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
+                canvas.drawBitmap(bmpPiso, src, dst, null);
+            }
+        }
+*/
         for (int i = temps.size() - 1; i >= 0; i--) {
             temps.get(i).onDraw(canvas);
         }
@@ -376,6 +407,8 @@ public class Juego extends SurfaceView {
                         @Override
                         public void run() {
                             vidasVisual.setText("" + vidas);
+                            actualizarVidas();
+
                         }
                     });
                  }
@@ -416,6 +449,7 @@ public class Juego extends SurfaceView {
                                      @Override
                                      public void run() {
                                          vidasVisual.setText("" + vidas);
+                                         actualizarVidas();
                                      }
                                  });
 

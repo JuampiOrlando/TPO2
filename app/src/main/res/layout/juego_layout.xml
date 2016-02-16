@@ -3,8 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/linear_juego"
-    android:background="@layout/backgroundrepete"
-
+    android:background="#ff000000"
     >
     <!--<com.example.fai.tpo2.Juego
         android:id="@+id/surface_view"
@@ -13,7 +12,6 @@
         android:layout_weight="0.8"/>
         -->
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
@@ -26,7 +24,7 @@
             android:textColor="#ffffffff"
             android:gravity="left"
             android:layout_weight="1"
-            android:textSize="20sp"
+            android:textSize="40sp"
             />
 
         <ToggleButton
@@ -43,13 +41,23 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:id="@+id/vidas"
             android:text="3"
             android:textColor="#ffffffff"
             android:gravity="right"
             android:layout_weight="1"
-            android:textSize="20sp"
+            android:textSize="40sp"
+
+            />
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageViewCorazones"
+
+            android:src="@drawable/cor3"
             />
 
     </LinearLayout>
