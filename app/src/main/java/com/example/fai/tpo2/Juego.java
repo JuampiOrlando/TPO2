@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -34,6 +35,9 @@ public class Juego extends SurfaceView {
     private TextView puntos;
 
     private int contador;
+
+
+
     private int vidas;
     private TextView contadorVisual;
     private TextView vidasVisual;
@@ -46,6 +50,80 @@ public class Juego extends SurfaceView {
     private int efectosTic = MainActivity.efectosSilenciados;
 
 
+    public Juego(JuegoActivity context, final Bundle savedInstanceStat){
+        super(context);
+        actividadJ = context;
+
+        //Si es rotacion guarda vidas
+        if (savedInstanceStat != null){
+
+            contador = savedInstanceStat.getInt("contador");;
+            vidas = savedInstanceStat.getInt("vidas");;
+        }else {
+            contador = 0;
+            vidas = 3;
+        }
+        contadorVisual = (TextView)actividadJ.findViewById(R.id.contador);
+        contadorVisual.setText("" + contador);
+        vidasVisual = (TextView)actividadJ.findViewById(R.id.vidas);
+        vidasVisual.setText("" + vidas);
+        gameLoopThread = new HiloJuego(this);
+
+        final Juego a = this;
+
+        //mp = MediaPlayer.create(context, R.raw.smw_coin);
+
+        disparo = sonido.load(context,R.raw.gun,1);
+        splash = sonido.load(context,R.raw.splat,1);
+        scream = sonido.load(context,R.raw.scream,1);
+        woah = sonido.load(context,R.raw.woah_male,1);
+
+        getHolder().addCallback(new SurfaceHolder.Callback() {
+
+
+                @Override
+                public void surfaceDestroyed(SurfaceHolder holder) {
+                    System.out.println("Termino?");
+                    boolean retry = true;
+                    gameLoopThread.setRunning(false);
+                    while (retry) {
+                        try {
+                            gameLoopThread.join();
+                            retry = false;
+                        } catch (InterruptedException e) {
+                        }
+                    }
+                }
+
+                @Override
+                public void surfaceCreated(SurfaceHolder holder) {
+                    if (gameLoopThread.getState() == Thread.State.TERMINATED) {
+
+                        gameLoopThread = new HiloJuego(a);
+                        if (savedInstanceStat != null)
+                            comprobarYgenerarSprites(savedInstanceStat);
+                        else
+                            comprobarYgenerarSprites();
+                        gameLoopThread.setRunning(true);
+                        gameLoopThread.start();
+                    } else {
+                        if (savedInstanceStat != null)
+                            comprobarYgenerarSprites(savedInstanceStat);
+                        else
+                            comprobarYgenerarSprites();
+                        gameLoopThread.setRunning(true);
+                        gameLoopThread.start();
+                    }
+                }
+
+                @Override
+                public void surfaceChanged(SurfaceHolder holder, int format,
+                                           int width, int height) {
+                }
+            });
+
+        bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
+    }
     public Juego(JuegoActivity context) {
         super(context);
         actividadJ = context;
@@ -85,16 +163,13 @@ public class Juego extends SurfaceView {
 
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                if (gameLoopThread .getState() == Thread.State.TERMINATED)
-                {
+                if (gameLoopThread.getState() == Thread.State.TERMINATED) {
 
-                    gameLoopThread =new HiloJuego(a);
+                    gameLoopThread = new HiloJuego(a);
                     comprobarYgenerarSprites();
                     gameLoopThread.setRunning(true);
                     gameLoopThread.start();
-                }
-                else
-                {
+                } else {
                     comprobarYgenerarSprites();
                     gameLoopThread.setRunning(true);
                     gameLoopThread.start();
@@ -112,6 +187,10 @@ public class Juego extends SurfaceView {
     public int getVidas() {
         return vidas;
     }
+    public int getContador() {
+        return contador;
+    }
+
 
     public void setVidas(int vidas) {
         this.vidas = vidas;
@@ -151,6 +230,21 @@ public class Juego extends SurfaceView {
 
 
     }
+    public void comprobarYgenerarSprites(Bundle saved){
+        System.out.println("LLEGUeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+        int tam = saved.getInt("tam");
+        List<Sprite> sprites = new ArrayList<Sprite>();
+
+            for(int i = 0; i < tam;i++) {
+                ArrayList<String> a = saved.getStringArrayList("sprite"+i);
+                if(Integer.parseInt(a.get(5))== 1){
+                    sprites.add(new Sprite(this,BitmapFactory.decodeResource(getResources(), R.drawable.general),a));
+                }
+                else
+                    sprites.add(new Sprite(this,obtenerBmp(Integer.parseInt(a.get(0))),a));
+            }
+        this.sprites=sprites;
+    }
 
     public boolean comprobarBueno(){
         boolean res=false;
@@ -173,7 +267,10 @@ public class Juego extends SurfaceView {
         gameLoopThread.setRunning(false);
         actividadJ.finish();
         gameLoopThread.setTerminar(true);
+    }
 
+    public List<Sprite> getSprites() {
+        return sprites;
     }
 
     public void pausarHilo(){
@@ -193,6 +290,12 @@ public class Juego extends SurfaceView {
     private Sprite createSprite(int vidas) {
 
         //Seleccion del sprite dependiendo la vida;
+
+
+        return new Sprite(this, obtenerBmp(vidas),vidas,false);
+    }
+
+    private Bitmap obtenerBmp(int vidas){
         int resouce;
         switch (vidas){
             case 0:
@@ -232,9 +335,8 @@ public class Juego extends SurfaceView {
                 resouce = R.drawable.mini_bad6;
 
         }
-
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resouce);
-        return new Sprite(this, bmp,vidas,false);
+        return bmp;
     }
 
     private Sprite createSpriteBueno() {
@@ -258,7 +360,7 @@ public class Juego extends SurfaceView {
 
         //contadorVisual.setText(""+contador);
 
-        canvas.drawColor(Color.BLACK);
+        canvas.drawColor(Color.BLUE);
         for (int i = temps.size() - 1; i >= 0; i--) {
             temps.get(i).onDraw(canvas);
         }

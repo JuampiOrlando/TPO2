@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Sprite {
@@ -25,11 +26,39 @@ public class Sprite {
 
     private int vidas;
 
-    private boolean bueno;
+    private int bueno;
 
-    public Sprite(Juego gameView, Bitmap bmp,int vidasP, boolean spriteBueno) {
+    public Sprite(Juego gameView, Bitmap bmp,ArrayList<String> a){
+        this.bmp= bmp;
+        this.gameView = gameView;
 
-        this.bueno=spriteBueno;
+        this.width = bmp.getWidth() / BMP_COLUMNS;
+        this.height = bmp.getHeight() / BMP_ROWS;
+
+        vidas = Integer.parseInt(a.get(0));
+        x = Integer.parseInt(a.get(2));
+        y = Integer.parseInt(a.get(1));
+        xSpeed = Integer.parseInt(a.get(3));
+        ySpeed = Integer.parseInt(a.get(4));
+
+        //this.orientacionCarriles();
+        if(gameView.getHeight() > gameView.getWidth()){
+            int temp=xSpeed;
+            xSpeed = ySpeed;
+            ySpeed = temp;
+
+        }
+        else{
+            int temp = ySpeed;
+            ySpeed = xSpeed;
+            xSpeed = temp;
+        }
+
+    }
+
+    public Sprite(Juego gameView, Bitmap bmp,int vidasP, boolean spriteBueno){
+
+        this.bueno=spriteBueno?1:0;
 
         this.width = bmp.getWidth() / BMP_COLUMNS;
         this.height = bmp.getHeight() / BMP_ROWS;
@@ -37,7 +66,6 @@ public class Sprite {
         this.bmp = bmp;
         this.vidas = vidasP; //Vidas del Sprite (ingresan por parametro)
 
-        Random rnd = new Random();
         //x = rnd.nextInt(gameView.getWidth() - width);
         x=0;
 
@@ -45,12 +73,17 @@ public class Sprite {
         //////////////////////////////////////////////////////////////
         //  4 Carriles
 
+        this.orientacionCarriles();
 
 
 
+    }
 
 
-        //////////////////////////
+
+    private void orientacionCarriles(){
+
+        Random rnd = new Random();
         if(gameView.getHeight() > gameView.getWidth()){
             //portrail
 
@@ -65,9 +98,9 @@ public class Sprite {
             x = carril * divisor;
             System.out.println("x: " + x);
 
-            xSpeed = rnd.nextInt(MAX_SPEED * 5) + 1;
+            ySpeed = rnd.nextInt(MAX_SPEED * 5) + 1;
             //ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
-            ySpeed = 0;
+            xSpeed = 0;
         }else{
             //landscape
 
@@ -87,13 +120,12 @@ public class Sprite {
             //ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
             ySpeed = 0;
         }
-
     }
 
     private void update() {
         if(gameView.getHeight() > gameView.getWidth()) {
             //portrail
-            y = y + xSpeed;
+            y = y + ySpeed;
             currentFrame = ++currentFrame % BMP_COLUMNS;
         }else{
             //landscape
@@ -106,9 +138,18 @@ public class Sprite {
     public void onDraw(Canvas canvas) {
         update();
         int srcX = currentFrame * width;
-        int srcY = 2 * height;  //seleccionamos la fila del sprite
+        int srcY = 0;
+        if(gameView.getHeight() > gameView.getWidth()) {
+            //portrail
+            srcY = 0 * height;  //seleccionamos la fila del sprite
+        }else{
+            //landscape
+            srcY = 2 * height;  //seleccionamos la fila del sprite
+        }
+
         Rect src = new Rect(srcX, srcY, srcX + width, srcY + height);
         Rect dst = new Rect(x, y, x + width, y + height);
+        System.out.println("Rect(x="+x+", y="+y+" ,x + width="+(x + width)+" , y + height = "+(y + height)+")");
         canvas.drawBitmap(bmp, src, dst, null);
 
     }
@@ -136,7 +177,20 @@ public class Sprite {
     }
 
     public boolean esBueno(){
-        return bueno;
+        return (bueno == 1);
+    }
+
+    public ArrayList<String> toArrayList() {
+
+        ArrayList<String> ret = new ArrayList<String>(6);
+        ret.add(0,"" + vidas);
+        ret.add(1,"" + x);
+        ret.add(2,"" + y);
+        ret.add(3,"" + xSpeed);
+        ret.add(4,"" + ySpeed);
+        ret.add(5,"" + bueno);
+
+        return ret;
     }
 
     public boolean sobrevivio(){
@@ -157,4 +211,6 @@ public class Sprite {
 
         return resultado;
     }
+
+
 }

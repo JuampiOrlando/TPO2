@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.util.List;
+
 public class JuegoActivity extends Activity {
 
     MediaPlayer musicaFondo;
@@ -24,12 +26,14 @@ public class JuegoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
 
+
         super.onCreate(savedInstanceState);
+
 
         //setContentView(new Juego(this));
         setContentView(R.layout.juego_layout);
 
-        this.agregarJuego();
+        this.agregarJuego(savedInstanceState);
 
         if (musicaFondoTic==0){
            musicaFondo = MediaPlayer.create(this,R.raw.musicafondo);
@@ -102,8 +106,9 @@ public class JuegoActivity extends Activity {
         //finish();
     }
 
-    private void agregarJuego(){
-        surface_vista = new Juego(this);
+    private void agregarJuego(Bundle savedInstanceState){
+        surface_vista = new Juego(this,savedInstanceState);
+
         LinearLayout contenedor;
         contenedor = (LinearLayout) findViewById(R.id.linear_juego);
         LinearLayout.LayoutParams parametros = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -117,7 +122,16 @@ public class JuegoActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
-        outState.putInt("vidas", 3);
+        outState.putInt("orietntacion", 3);
+        List<Sprite> todosSprites = surface_vista.getSprites();
+
+        outState.putInt("vidas",surface_vista.getVidas());
+        outState.putInt("contador",surface_vista.getContador());
+
+        outState.putInt("tam", todosSprites.size() );
+        for(int i = 0; i < todosSprites.size();i++){
+            outState.putStringArrayList("sprite"+i,todosSprites.get(i).toArrayList() );
+        }
 
 
     }

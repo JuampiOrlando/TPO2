@@ -3,7 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/linear_juego"
-    android:background="#ff000000"
+    android:background="@layout/backgroundrepete"
+
     >
     <!--<com.example.fai.tpo2.Juego
         android:id="@+id/surface_view"
@@ -12,6 +13,7 @@
         android:layout_weight="0.8"/>
         -->
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
