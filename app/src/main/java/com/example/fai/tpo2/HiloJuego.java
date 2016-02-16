@@ -2,9 +2,6 @@ package com.example.fai.tpo2;
 
 import android.graphics.Canvas;
 
-/**
- * Created by morexlt on 2/3/16.
- */
 
 public class HiloJuego extends Thread {
     static final long FPS = 10;
@@ -35,7 +32,6 @@ public class HiloJuego extends Thread {
                 c = view.getHolder().lockCanvas();
                 synchronized (view.getHolder()) {
                     if(view.juegoTerminado()) {
-                        System.out.println("JUEGO TERMINAOD :D ");
                         view.getNickname();
                         view.terminar();
                     }

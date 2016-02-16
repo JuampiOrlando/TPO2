@@ -1,14 +1,24 @@
 <resources>
-    <string name="app_name">TPO2</string>
+    <string name="app_name">Dont kill the bald-man!</string>
     <string name="action_settings">Settings</string>
     <string name="action_musica">Music</string>
     <string name="begin">Let the game begin!</string>
-    <string name="mensaje">Kill them all!</string>
+    <string name="mensaje">Dont kill the bald-man!</string>
     <string name="begin2">Start</string>
     <string name="play">Play</string>
     <string name="stats">Ranking</string>
     <string name="exit">Exit</string>
     <string name="fin">Game over :D</string>
+    <string name="musica_silenciada">Music off</string>
+    <string name="sonidos_silenciados">Effects off</string>
+    <string name="sonido_on">Mute</string>
+    <string name="sonido_off">Music</string>
+    <string name="posicion">POSITION</string>
+    <string name="nickname">NICKNAME</string>
+    <string name="puntaje">SCORE</string>
+    <string name="enviar">SEND</string>
+    <string name="puntaje_enviar">Score:</string>
+    <string name="ingrese">Go to Leaderboards!</string>
 
 
     <color name="black">#000000</color>

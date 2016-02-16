@@ -36,8 +36,8 @@
             android:id="@+id/cajaM"
             android:checked="true"
             android:clickable="true"
-            android:textOn="Silenciar"
-            android:textOff="Reproducir" />
+            android:textOn="@string/sonido_on"
+            android:textOff="@string/sonido_off" />
         <ToggleButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

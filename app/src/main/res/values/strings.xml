@@ -4,13 +4,21 @@
     <string name="action_musica">Musica</string>
     <string name="begin">Que comience el juego!</string>
     <string name="begin2">Comenzar</string>
-    <string name="mensaje">Mátalos a todos!</string>
+    <string name="mensaje">No mates al pelado!</string>
     <string name="play">Jugar</string>
     <string name="stats">Ranking</string>
     <string name="exit">Salir</string>
     <string name="fin">Juego terminado :D</string>
     <string name="musica_silenciada">Silenciar musica</string>
     <string name="sonidos_silenciados">Silenciar efectos</string>
+    <string name="sonido_on">Silenciar</string>
+    <string name="sonido_off">Reproducir</string>
+    <string name="posicion">POSICION</string>
+    <string name="nickname">NICKNAME</string>
+    <string name="puntaje">PUNTAJE</string>
+    <string name="enviar">ENVIAR</string>
+    <string name="puntaje_enviar">Puntaje:</string>
+    <string name="ingrese">Ingrese al Ranking!</string>
 
 
     <color name="black">#000000</color>

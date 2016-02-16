@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Ingrese al Ranking!"
+        android:text="@string/ingrese"
         android:id="@+id/textView"
         android:layout_marginTop="51dp"
         android:textColor="#e0dada"
@@ -33,7 +33,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Puntaje:"
+                android:text="@string/puntaje_enviar"
                 android:textSize="25sp"
                 android:textColor="#e0dada"
                 android:gravity="center"/>
@@ -56,13 +56,12 @@
             android:layout_marginLeft="45dp"
             android:textColorHint="#9e8c8c"
             android:layout_marginTop="50dp"
-            android:hint="Nickname?"
-            />
+            android:hint="Nickname?" />
 
         <Button
             android:layout_width="321dp"
             android:layout_height="wrap_content"
-            android:text="ENVIAR"
+            android:text="@string/enviar"
             android:id="@+id/button"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"

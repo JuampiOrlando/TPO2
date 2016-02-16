@@ -29,32 +29,46 @@ public class JuegoActivity extends Activity {
 
 
         super.onCreate(savedInstanceState);
-
-        //setContentView(new Juego(this));
         setContentView(R.layout.juego_layout);
 
         this.agregarJuego(savedInstanceState);
 
+        this.agregarMusica();
+
+        this.agregarPausa();
+
+        //Mensaje de Bienvenida
+        Context context = getApplicationContext();
+        CharSequence txt = getResources().getString(R.string.mensaje);
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, txt, duration);
+        toast.show();
+
+
+    }
+
+    private void agregarMusica(){
         if (musicaFondoTic==0){
-           musicaFondo = MediaPlayer.create(this,R.raw.musicafondo);
-           musicaFondo.setLooping(true);
-           musicaFondo.start();
+            musicaFondo = MediaPlayer.create(this,R.raw.musicafondo);
+            musicaFondo.setLooping(true);
+            musicaFondo.start();
 
-           musica = (ToggleButton) findViewById(R.id.cajaM);
-           musica.setOnClickListener(new View.OnClickListener() {
+            musica = (ToggleButton) findViewById(R.id.cajaM);
+            musica.setOnClickListener(new View.OnClickListener() {
 
-             @Override
-             public void onClick(View v) {
+                @Override
+                public void onClick(View v) {
 
-                if (musica.isChecked()) {
-                    // si esta pausado regresa al ultimo estado de la musica
-                    musicaFondo.start();
-                } else {
-                    // pausa la musica
-                    musicaFondo.pause();
-                 }
-             }
-           });
+                    if (musica.isChecked()) {
+                        // si esta pausado regresa al ultimo estado de la musica
+                        musicaFondo.start();
+                    } else {
+                        // pausa la musica
+                        musicaFondo.pause();
+                    }
+                }
+            });
         } else{
             musica = (ToggleButton) findViewById(R.id.cajaM);
             ///queda silenciado
@@ -64,9 +78,8 @@ public class JuegoActivity extends Activity {
             musica.setPaintFlags(musica.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         }
-
-
-
+    }
+    private void agregarPausa(){
         btnPausa = (ToggleButton) findViewById(R.id.btnPausa);
         System.out.println("BOTON: "+(btnPausa!=null));
         btnPausa.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +92,7 @@ public class JuegoActivity extends Activity {
                         musicaFondo.start();
                         musica.toggle();
                     }
-                  } else {
+                } else {
 
                     surface_vista.pausar();
 
@@ -92,18 +105,6 @@ public class JuegoActivity extends Activity {
                 }
             }
         });
-
-
-
-
-        Context context = getApplicationContext();
-        CharSequence txt = getResources().getString(R.string.mensaje);
-        int duration = Toast.LENGTH_LONG;
-
-        Toast toast = Toast.makeText(context, txt, duration);
-        toast.show();
-
-
     }
 
     @Override
@@ -154,13 +155,13 @@ public class JuegoActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
-        outState.putInt("orietntacion", 3);
         List<Sprite> todosSprites = surface_vista.getSprites();
 
         outState.putInt("vidas",surface_vista.getVidas());
         outState.putInt("contador",surface_vista.getContador());
 
         outState.putInt("tam", todosSprites.size() );
+        //Por cada sprite, almacenamos un arreglo de sus atributos
         for(int i = 0; i < todosSprites.size();i++){
             outState.putStringArrayList("sprite"+i,todosSprites.get(i).toArrayList() );
         }
@@ -168,13 +169,4 @@ public class JuegoActivity extends Activity {
 
     }
 
-    /*@Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState){
-        super.onRestoreInstanceState(savedInstanceState);
-
-        //agregarJuego();
-        //surface_vista.setVidas(savedInstanceState.getInt("vidas"));
-
-
-    }*/
 }

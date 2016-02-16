@@ -40,7 +40,10 @@ public class PopNickname extends Activity {
     }
     public void onClickEnviar(View v) {
         EditText nickVisual = (EditText) findViewById(R.id.nickname);
-        MainActivity.agregarRanking(nickVisual.getText().toString(),puntaje);
-        this.finish();
+        String nick = nickVisual.getText().toString();
+        if(!nick.equals("")) {
+            MainActivity.agregarRanking(nick, puntaje);
+            this.finish();
+        }
     }
 }

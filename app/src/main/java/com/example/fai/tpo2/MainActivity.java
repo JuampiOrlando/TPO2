@@ -42,25 +42,13 @@ public class MainActivity extends Activity {
         //CREAMOS LA BASE DE DATOS.
         dataSource = new esquemaBDranking(this);
 
-       // textBox = (EditText) findViewById(R.id.txtText1);
-        //puntitos = (TextView) findViewById(R.id.Puntos);
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     public void onClickJugar(View v) {
-/*
 
-        //Podriamos usar un Toast si quisieramos
-        Context context = getApplicationContext();
-        CharSequence text = "Bienvenido!!";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-*/
         //Mensaje de Bienvenida
         AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
         String msj = getResources().getString(R.string.begin);
@@ -73,9 +61,7 @@ public class MainActivity extends Activity {
                         dialog.cancel();
                         //Invocando la otra Activity
                         Intent intent = new Intent(MainActivity.this, JuegoActivity.class);
-                        //intent.putExtra(EXTRA_MESSAGE, message);
                         startActivity(intent);
-                        //finish();
                     }
                 });
 
@@ -125,7 +111,6 @@ public class MainActivity extends Activity {
 
     }
 
-    //Esto se autogenero solo! Dsps debemos revisar!
     @Override
     public void onStart() {
         super.onStart();

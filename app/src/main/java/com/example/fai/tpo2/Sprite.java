@@ -70,8 +70,6 @@ public class Sprite {
         //x = rnd.nextInt(gameView.getWidth() - width);
         x=0;
 
-
-        //////////////////////////////////////////////////////////////
         //  4 Carriles
 
         this.orientacionCarriles();

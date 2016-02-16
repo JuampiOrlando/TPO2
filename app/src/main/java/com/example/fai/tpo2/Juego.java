@@ -26,14 +26,12 @@ public class Juego extends SurfaceView {
     private long lastClick;
     private Bitmap bmpBlood;
 
-    //private MediaPlayer mp;
     private SoundPool sonido = new SoundPool(10, AudioManager.STREAM_MUSIC,0);
     private int disparo;
     private int splash;
     private int scream;
     private int woah;
     private JuegoActivity actividadJ;
-    private TextView puntos;
 
     private int contador;
     private int vidas;
@@ -55,32 +53,13 @@ public class Juego extends SurfaceView {
         actividadJ = context;
 
         //Si es rotacion guarda vidas
-        if (savedInstanceStat != null){
-
-            contador = savedInstanceStat.getInt("contador");;
-            vidas = savedInstanceStat.getInt("vidas");;
-        }else {
-            contador = 0;
-            vidas = 3;
-        }
-        contadorVisual = (TextView)actividadJ.findViewById(R.id.contador);
-        contadorVisual.setText("" + contador);
-        vidasVisual = (TextView)actividadJ.findViewById(R.id.vidas);
-        vidasVisual.setText("" + vidas);
-
-        corazones = (ImageView)actividadJ.findViewById(R.id.imageViewCorazones);
-        actualizarVidas();
+        this.actualizarVisuales(savedInstanceStat);
 
         gameLoopThread = new HiloJuego(this);
 
         final Juego a = this;
 
-        //mp = MediaPlayer.create(context, R.raw.smw_coin);
-
-        disparo = sonido.load(context,R.raw.gun,1);
-        splash = sonido.load(context,R.raw.splat,1);
-        scream = sonido.load(context,R.raw.scream,1);
-        woah = sonido.load(context,R.raw.woah_male,1);
+        this.cargarSonidos();
 
         getHolder().addCallback(new SurfaceHolder.Callback() {
 
@@ -128,67 +107,31 @@ public class Juego extends SurfaceView {
 
         bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
     }
-    public Juego(JuegoActivity context) {
-        super(context);
 
-        paused = false;
 
-        actividadJ = context;
+    private void actualizarVisuales(Bundle savedInstanceStat){
+        if (savedInstanceStat != null){
 
-        contador = 0;
-        vidas = 3;
-
+            contador = savedInstanceStat.getInt("contador");;
+            vidas = savedInstanceStat.getInt("vidas");;
+        }else {
+            contador = 0;
+            vidas = 3;
+        }
         contadorVisual = (TextView)actividadJ.findViewById(R.id.contador);
+        contadorVisual.setText("" + contador);
         vidasVisual = (TextView)actividadJ.findViewById(R.id.vidas);
-        gameLoopThread = new HiloJuego(this);
+        vidasVisual.setText("" + vidas);
 
-        final Juego a = this;
+        corazones = (ImageView)actividadJ.findViewById(R.id.imageViewCorazones);
+        actualizarVidas();
+    }
 
-        //mp = MediaPlayer.create(context, R.raw.smw_coin);
-
-        disparo = sonido.load(context,R.raw.gun,1);
-        splash = sonido.load(context,R.raw.splat,1);
-        scream = sonido.load(context,R.raw.scream,1);
-        woah = sonido.load(context,R.raw.woah_male,1);
-
-        getHolder().addCallback(new SurfaceHolder.Callback() {
-
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {
-                System.out.println("Termino?");
-                boolean retry = true;
-                gameLoopThread.setRunning(false);
-                while (retry) {
-                    try {
-                        gameLoopThread.join();
-                        retry = false;
-                    } catch (InterruptedException e) {
-                    }
-                }
-            }
-
-            @Override
-            public void surfaceCreated(SurfaceHolder holder) {
-                if (gameLoopThread.getState() == Thread.State.TERMINATED) {
-
-                    gameLoopThread = new HiloJuego(a);
-                    comprobarYgenerarSprites();
-                    gameLoopThread.setRunning(true);
-                    gameLoopThread.start();
-                } else {
-                    comprobarYgenerarSprites();
-                    gameLoopThread.setRunning(true);
-                    gameLoopThread.start();
-                }
-            }
-
-            @Override
-            public void surfaceChanged(SurfaceHolder holder, int format,
-                                       int width, int height) {
-            }
-        });
-        bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
+    private void cargarSonidos(){
+        disparo = sonido.load(actividadJ,R.raw.gun,1);
+        splash = sonido.load(actividadJ,R.raw.splat,1);
+        scream = sonido.load(actividadJ,R.raw.scream,1);
+        woah = sonido.load(actividadJ,R.raw.woah_male,1);
     }
 
     public int getVidas() {
@@ -215,12 +158,6 @@ public class Juego extends SurfaceView {
                 break;
         }
     }
-
-
-    public void setVidas(int vidas) {
-        this.vidas = vidas;
-    }
-
 
 
 

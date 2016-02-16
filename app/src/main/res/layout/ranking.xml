@@ -8,7 +8,7 @@
         android:paddingTop="10dp">
         <TextView
             android:layout_column="0"
-            android:text="POSICION"
+            android:text="@string/posicion"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"/>
@@ -26,7 +26,7 @@
         </LinearLayout>
         <TextView
             android:layout_column="0"
-            android:text="NICKNAME"
+            android:text="@string/nickname"
             android:textSize="20sp"
             android:textStyle="bold" />
         <LinearLayout
@@ -41,7 +41,7 @@
 
         </LinearLayout>
         <TextView
-            android:text="PUNTAJE"
+            android:text="@string/puntaje"
             android:gravity="right"
             android:textSize="20sp"
             android:textStyle="bold"

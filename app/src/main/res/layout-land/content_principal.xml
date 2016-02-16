@@ -91,28 +91,5 @@
         android:layout_height="fill_parent"
         android:layout_weight="0.15">
     </RelativeLayout>
-     <!-- Estos, son para agregar dsps! (No iria aca!)
-     <TextView
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:text="Introduzca algún texto"/>
-     <EditText
-         android:id="@+id/txtText1"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"/> -->
 
-    <!-- Esta funcion no va aca! Es para registrar el nick y el rankin!
-    <Button android:id="@+id/btnGuardar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClickGuardar"
-        android:text="Guardar"/>
-        -->
-
-    <!--
-    <TextView android:layout_width="128dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/Puntos"
-        android:layout_weight="0.10"/>
-        -->
 </LinearLayout>

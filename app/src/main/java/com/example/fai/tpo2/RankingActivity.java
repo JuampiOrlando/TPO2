@@ -9,9 +9,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-/**
- * Created by juampi9498 on 15/02/16.
- */
+
 public class RankingActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {

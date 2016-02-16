@@ -69,7 +69,7 @@
                 android:layout_gravity="center"
                 android:onClick="onClickCheckBox1"
                 android:layout_weight="1"
-                android:buttonTint="#ffdf072b"/>
+                android:buttonTint="#0dcf27"/>
 
             <CheckBox
                 android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
                 android:onClick="onClickCheckBox2"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:buttonTint="#ffdf072b" />
+                android:buttonTint="#0dcf27"/>
          </LinearLayout>
 
 
